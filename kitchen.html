@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sasurali Ghar - Kitchen</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f3f3f3;
+color:#222;
+}
+
+header{
+background:#7b1e1e;
+color:white;
+padding:20px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:100;
+}
+
+header h1{
+margin:0;
+font-size:28px;
+}
+
+.header-info{
+margin-top:8px;
+font-size:14px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:15px;
+}
+
+.order-card{
+background:white;
+border-radius:15px;
+padding:18px;
+margin-bottom:18px;
+box-shadow:0 3px 12px #ccc;
+border-left:7px solid #7b1e1e;
+}
+
+.order-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.table{
+font-size:24px;
+font-weight:bold;
+color:#7b1e1e;
+}
+
+.order-time{
+color:#777;
+font-size:13px;
+}
+
+.status{
+display:inline-block;
+padding:7px 12px;
+border-radius:20px;
+font-weight:bold;
+font-size:13px;
+}
+
+.status-new{
+background:#ffe1e1;
+color:#a00000;
+}
+
+.status-preparing{
+background:#fff0c2;
+color:#8a6200;
+}
+
+.status-completed{
+background:#dff5df;
+color:#176b17;
+}
+
+.items{
+margin-top:15px;
+border-top:1px solid #ddd;
+padding-top:10px;
+}
+
+.item-row{
+display:flex;
+justify-content:space-between;
+padding:8px 0;
+font-size:17px;
+}
+
+.item-name{
+font-weight:bold;
+}
+
+.item-price{
+font-weight:bold;
+}
+
+.details{
+background:#fff7e8;
+border-radius:10px;
+padding:12px;
+margin-top:12px;
+}
+
+.detail-row{
+margin:6px 0;
+}
+
+.total{
+font-size:21px;
+font-weight:bold;
+text-align:right;
+margin-top:12px;
+}
+
+.buttons{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+button{
+border:0;
+border-radius:10px;
+padding:13px 16px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+flex:1;
+}
+
+.prepare{
+background:#e5a900;
+color:white;
+}
+
+.complete{
+background:#228b22;
+color:white;
+}
+
+.refresh{
+background:white;
+color:#7b1e1e;
+border:2px solid #7b1e1e;
+margin-top:10px;
+width:100%;
+}
+
+.empty{
+background:white;
+padding:40px 20px;
+border-radius:15px;
+text-align:center;
+font-size:20px;
+color:#777;
+}
+
+.error{
+background:#ffe0e0;
+color:#a00000;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+display:none;
+}
+
+.loading{
+text-align:center;
+padding:20px;
+color:#777;
+}
+
+@media(max-width:600px){
+
+header h1{
+font-size:24px;
+}
+
+.table{
+font-size:21px;
+}
+
+.item-row{
+font-size:16px;
+}
+
+.buttons{
+flex-direction:column;
+}
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>🇳🇵 Sasurali Ghar</h1>
+
+<div class="header-info">
+🍳 Kitchen Order Screen
+</div>
+
+</header>
+
+
+<div class="container">
+
+<button class="refresh" onclick="loadOrders()">
+🔄 Refresh Orders
+</button>
+
+<div id="errorBox" class="error"></div>
+
+<div id="orders">
+
+<div class="loading">
+Loading orders...
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+
+/* =====================================
+   SUPABASE CONNECTION
+===================================== */
+
+const SUPABASE_URL =
+"https://naqxasgbfnjpamzjwkov.supabase.co";
+
+
+/*
+   IMPORTANT:
+   Put the SAME PUBLISHABLE KEY
+   that is already working in index.html.
+*/
+
+const SUPABASE_KEY =
+"sb_publishable_vKkQZFBvWPu1FBYiR3QCdQ_DlkzGJqj";
+
+
+/* =====================================
+   LOAD ORDERS
+===================================== */
+
+async function loadOrders(){
+
+const ordersBox =
+document.getElementById("orders");
+
+const errorBox =
+document.getElementById("errorBox");
+
+errorBox.style.display="none";
+
+try{
+
+const response =
+await fetch(
+
+SUPABASE_URL +
+"/rest/v1/orders?select=*&order=created_at.desc",
+
+{
+
+method:"GET",
+
+headers:{
+
+"apikey":
+SUPABASE_KEY,
+
+"Authorization":
+"Bearer " +
+SUPABASE_KEY
+
+}
+
+}
+
+);
+
+
+if(!response.ok){
+
+const error =
+await response.text();
+
+console.error(error);
+
+errorBox.textContent =
+"❌ Could not load orders.";
+
+errorBox.style.display="block";
+
+return;
+
+}
+
+
+const orders =
+await response.json();
+
+
+displayOrders(orders);
+
+
+}catch(error){
+
+console.error(error);
+
+errorBox.textContent =
+"❌ Connection error.";
+
+errorBox.style.display="block";
+
+}
+
+}
+
+
+/* =====================================
+   DISPLAY ORDERS
+===================================== */
+
+function displayOrders(orders){
+
+const box =
+document.getElementById("orders");
+
+
+if(orders.length===0){
+
+box.innerHTML = `
+
+<div class="empty">
+
+🍽️ No orders yet.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+box.innerHTML="";
+
+
+orders.forEach(order=>{
+
+const card =
+document.createElement("div");
+
+card.className =
+"order-card";
+
+
+let statusClass =
+"status-new";
+
+let statusText =
+"NEW";
+
+
+if(order.status==="preparing"){
+
+statusClass =
+"status-preparing";
+
+statusText =
+"PREPARING";
+
+}
+
+
+if(order.status==="completed"){
+
+statusClass =
+"status-completed";
+
+statusText =
+"COMPLETED";
+
+}
+
+
+let itemsHTML="";
+
+
+if(
+Array.isArray(order.order_items)
+){
+
+order.order_items.forEach(item=>{
+
+itemsHTML += `
+
+<div class="item-row">
+
+<div class="item-name">
+
+${escapeHTML(item.name)}
+ × ${item.quantity}
+
+</div>
+
+<div class="item-price">
+
+¥${item.price * item.quantity}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+let customer =
+order.customer_name ||
+"Not provided";
+
+
+let spice =
+order.spice_level ||
+"Normal Spicy";
+
+
+let created =
+formatTime(order.created_at);
+
+
+card.innerHTML = `
+
+<div class="order-top">
+
+<div>
+
+<div class="table">
+
+🪑 ${escapeHTML(
+order.table_number || "Unknown"
+)}
+
+</div>
+
+<div class="order-time">
+
+${created}
+
+</div>
+
+</div>
+
+<div class="status ${statusClass}">
+
+${statusText}
+
+</div>
+
+</div>
+
+
+<div class="items">
+
+${itemsHTML}
+
+</div>
+
+
+<div class="details">
+
+<div class="detail-row">
+
+👤 <strong>Customer:</strong>
+${escapeHTML(customer)}
+
+</div>
+
+<div class="detail-row">
+
+🌶️ <strong>Spice:</strong>
+${escapeHTML(spice)}
+
+</div>
+
+</div>
+
+
+<div class="total">
+
+Total: ¥${order.total}
+
+</div>
+
+
+<div class="buttons">
+
+${
+order.status==="new"
+?
+
+`<button
+class="prepare"
+onclick="changeStatus('${order.id}','preparing')">
+
+👨‍🍳 Preparing
+
+</button>`
+
+:
+
+""
+}
+
+
+${
+order.status==="preparing"
+?
+
+`<button
+class="complete"
+onclick="changeStatus('${order.id}','completed')">
+
+✅ Completed
+
+</button>`
+
+:
+
+""
+}
+
+
+${
+order.status==="completed"
+?
+
+`<button
+class="complete"
+disabled>
+
+✅ Completed
+
+</button>`
+
+:
+
+""
+}
+
+</div>
+
+`;
+
+
+box.appendChild(card);
+
+});
+
+}
+
+
+/* =====================================
+   CHANGE ORDER STATUS
+===================================== */
+
+async function changeStatus(
+id,
+newStatus
+){
+
+try{
+
+const response =
+await fetch(
+
+SUPABASE_URL +
+"/rest/v1/orders?id=eq." +
+encodeURIComponent(id),
+
+{
+
+method:"PATCH",
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+"apikey":
+SUPABASE_KEY,
+
+"Authorization":
+"Bearer " +
+SUPABASE_KEY,
+
+"Prefer":
+"return=minimal"
+
+},
+
+body:JSON.stringify({
+
+status:newStatus
+
+})
+
+}
+
+);
+
+
+if(!response.ok){
+
+const error =
+await response.text();
+
+console.error(error);
+
+alert(
+"Could not update order."
+);
+
+return;
+
+}
+
+
+loadOrders();
+
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Connection error."
+);
+
+}
+
+}
+
+
+/* =====================================
+   TIME
+===================================== */
+
+function formatTime(dateString){
+
+if(!dateString){
+
+return "";
+
+}
+
+const date =
+new Date(dateString);
+
+
+return date.toLocaleString(
+"en-JP",
+{
+
+year:"numeric",
+month:"short",
+day:"numeric",
+hour:"2-digit",
+minute:"2-digit"
+
+}
+
+);
+
+}
+
+
+/* =====================================
+   SECURITY
+===================================== */
+
+function escapeHTML(value){
+
+return String(value)
+
+.replaceAll("&","&amp;")
+
+.replaceAll("<","&lt;")
+
+.replaceAll(">","&gt;")
+
+.replaceAll('"',"&quot;")
+
+.replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================
+   START
+===================================== */
+
+loadOrders();
+
+
+/*
+   Check for new orders every 5 seconds.
+*/
+
+setInterval(
+loadOrders,
+5000
+);
+
+
+</script>
+
+
+</body>
+</html>
