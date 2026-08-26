@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -43,6 +42,16 @@ header p {
 
 .welcome {
     font-size: 19px;
+}
+
+.table-display {
+    display: inline-block;
+    margin-top: 12px;
+    background: white;
+    color: #7b1e1e;
+    padding: 9px 18px;
+    border-radius: 25px;
+    font-weight: bold;
 }
 
 .cart-bar {
@@ -267,6 +276,11 @@ header p {
     font-size: 16px;
 }
 
+.customer-details input[readonly] {
+    background: #eeeeee;
+    font-weight: bold;
+}
+
 .cart-summary {
     margin-top: 20px;
     padding-top: 15px;
@@ -337,7 +351,6 @@ footer {
 
 <body>
 
-
 <header>
 
     <div class="logo">
@@ -355,6 +368,10 @@ footer {
     <p class="welcome">
         स्वागत छ • Welcome
     </p>
+
+    <div class="table-display">
+        🪑 <span id="tableDisplay">Menu</span>
+    </div>
 
 </header>
 
@@ -448,8 +465,6 @@ footer {
 <main class="menu">
 
 
-<!-- NAAN -->
-
 <h2 class="category-title">
     🫓 Naan
 </h2>
@@ -457,1133 +472,1095 @@ footer {
 
 <div class="item" data-category="naan">
 
-    <h3>Plain Naan</h3>
+<h3>Plain Naan</h3>
 
-    <div class="japanese">
-        プレーンナン
-    </div>
+<div class="japanese">
+プレーンナン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥300
-        </div>
+<div class="price">¥300</div>
 
-        <button class="order"
-            onclick="addToCart('Plain Naan',300)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Plain Naan',300)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="naan">
 
-    <h3>Cheese Naan</h3>
+<h3>Cheese Naan</h3>
 
-    <div class="japanese">
-        チーズナン
-    </div>
+<div class="japanese">
+チーズナン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥500
-        </div>
+<div class="price">¥500</div>
 
-        <button class="order"
-            onclick="addToCart('Cheese Naan',500)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Cheese Naan',500)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="naan">
 
-    <h3>Keema Naan</h3>
+<h3>Keema Naan</h3>
 
-    <div class="japanese">
-        キーマナン
-    </div>
+<div class="japanese">
+キーマナン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥500
-        </div>
+<div class="price">¥500</div>
 
-        <button class="order"
-            onclick="addToCart('Keema Naan',500)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Keema Naan',500)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="naan">
 
-    <h3>Garlic Naan</h3>
+<h3>Garlic Naan</h3>
 
-    <div class="japanese">
-        ガーリックナン
-    </div>
+<div class="japanese">
+ガーリックナン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥350
-        </div>
+<div class="price">¥350</div>
 
-        <button class="order"
-            onclick="addToCart('Garlic Naan',350)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Garlic Naan',350)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="naan">
 
-    <h3>Aalu Naan</h3>
+<h3>Aalu Naan</h3>
 
-    <div class="japanese">
-        じゃがいもナン
-    </div>
+<div class="japanese">
+じゃがいもナン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥400
-        </div>
+<div class="price">¥400</div>
 
-        <button class="order"
-            onclick="addToCart('Aalu Naan',400)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Aalu Naan',400)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="naan">
 
-    <h3>Sesame Naan</h3>
+<h3>Sesame Naan</h3>
 
-    <div class="japanese">
-        ゴマナン
-    </div>
+<div class="japanese">
+ゴマナン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥350
-        </div>
+<div class="price">¥350</div>
 
-        <button class="order"
-            onclick="addToCart('Sesame Naan',350)">
-            Add
-        </button>
-
-    </div>
+<button class="order"
+onclick="addToCart('Sesame Naan',350)">
+Add
+</button>
 
 </div>
 
+</div>
 
-<!-- NOODLES -->
 
 <h2 class="category-title">
-    🍜 Chowmein & Thukpa
+🍜 Chowmein & Thukpa
 </h2>
 
 
 <div class="item" data-category="noodles">
 
-    <h3>Chowmein</h3>
+<h3>Chowmein</h3>
 
-    <div class="japanese">
-        チャウミン
-    </div>
+<div class="japanese">
+チャウミン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥550
-        </div>
+<div class="price">¥550</div>
 
-        <button class="order"
-            onclick="addToCart('Chowmein',550)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Chowmein',550)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="noodles">
 
-    <h3>Thukpa</h3>
+<h3>Thukpa</h3>
 
-    <div class="japanese">
-        チュウパ
-    </div>
+<div class="japanese">
+チュウパ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥700
-        </div>
+<div class="price">¥700</div>
 
-        <button class="order"
-            onclick="addToCart('Thukpa',700)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Thukpa',700)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="noodles">
 
-    <h3>Mix Thukpa</h3>
+<h3>Mix Thukpa</h3>
 
-    <div class="japanese">
-        ミックスチュウパ
-    </div>
+<div class="japanese">
+ミックスチュウパ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥750
-        </div>
+<div class="price">¥750</div>
 
-        <button class="order"
-            onclick="addToCart('Mix Thukpa',750)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Mix Thukpa',750)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="noodles">
 
-    <h3>Mix Chowmein</h3>
+<h3>Mix Chowmein</h3>
 
-    <div class="japanese">
-        ミックスチャウミン
-    </div>
+<div class="japanese">
+ミックスチャウミン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥700
-        </div>
+<div class="price">¥700</div>
 
-        <button class="order"
-            onclick="addToCart('Mix Chowmein',700)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Mix Chowmein',700)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
-<!-- MOMO -->
-
 <h2 class="category-title">
-    🥟 Momo
+🥟 Momo
 </h2>
 
 
 <div class="item" data-category="momo">
 
-    <h3>Steam Momo</h3>
+<h3>Steam Momo</h3>
 
-    <div class="japanese">
-        スチームモモ
-    </div>
+<div class="japanese">
+スチームモモ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥600
-        </div>
+<div class="price">¥600</div>
 
-        <button class="order"
-            onclick="addToCart('Steam Momo',600)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Steam Momo',600)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="momo">
 
-    <h3>Soup Momo</h3>
+<h3>Soup Momo</h3>
 
-    <div class="japanese">
-        スープモモ
-    </div>
+<div class="japanese">
+スープモモ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥700
-        </div>
+<div class="price">¥700</div>
 
-        <button class="order"
-            onclick="addToCart('Soup Momo',700)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Soup Momo',700)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="momo">
 
-    <h3>Chilly Momo</h3>
+<h3>Chilly Momo</h3>
 
-    <div class="japanese">
-        チリモモ
-    </div>
+<div class="japanese">
+チリモモ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥700
-        </div>
+<div class="price">¥700</div>
 
-        <button class="order"
-            onclick="addToCart('Chilly Momo',700)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Chilly Momo',700)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="momo">
 
-    <h3>Fry Momo</h3>
+<h3>Fry Momo</h3>
 
-    <div class="japanese">
-        フライモモ
-    </div>
+<div class="japanese">
+フライモモ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥650
-        </div>
+<div class="price">¥650</div>
 
-        <button class="order"
-            onclick="addToCart('Fry Momo',650)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Fry Momo',650)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
-<!-- KHAJA -->
-
 <h2 class="category-title">
-    🥙 Khaja & Snacks
+🥙 Khaja & Snacks
 </h2>
 
 
 <div class="item" data-category="khaja">
 
-    <h3>Samosa</h3>
+<h3>Samosa</h3>
 
-    <div class="japanese">
-        サモサ
-    </div>
+<div class="japanese">
+サモサ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥500
-        </div>
+<div class="price">¥500</div>
 
-        <button class="order"
-            onclick="addToCart('Samosa',500)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Samosa',500)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="khaja">
 
-    <h3>Samosa Chat</h3>
+<h3>Samosa Chat</h3>
 
-    <div class="japanese">
-        サモサチャット
-    </div>
+<div class="japanese">
+サモサチャット
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥700
-        </div>
+<div class="price">¥700</div>
 
-        <button class="order"
-            onclick="addToCart('Samosa Chat',700)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Samosa Chat',700)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="khaja">
 
-    <h3>Khaja Set (Bhutan)</h3>
+<h3>Khaja Set (Bhutan)</h3>
 
-    <div class="japanese">
-        カザセット（ヤギの内臓）
-    </div>
+<div class="japanese">
+カザセット（ヤギの内臓）
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥1,000
-        </div>
+<div class="price">¥1,000</div>
 
-        <button class="order"
-            onclick="addToCart('Khaja Set (Bhutan)',1000)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Khaja Set (Bhutan)',1000)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="khaja">
 
-    <h3>Sasurali Khaja Set</h3>
+<h3>Sasurali Khaja Set</h3>
 
-    <div class="japanese">
-        サスラリカザセット（スクティとチキンチョイラ）
-    </div>
+<div class="japanese">
+サスラリカザセット（スクティとチキンチョイラ）
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥1,500
-        </div>
+<div class="price">¥1,500</div>
 
-        <button class="order"
-            onclick="addToCart('Sasurali Khaja Set',1500)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Sasurali Khaja Set',1500)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="khaja">
 
-    <h3>Choila Set (Mutton or Chicken)</h3>
+<h3>Choila Set (Mutton or Chicken)</h3>
 
-    <div class="japanese">
-        チョイラセット（マトンまたはチキン）
-    </div>
+<div class="japanese">
+チョイラセット（マトンまたはチキン）
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥1,150
-        </div>
+<div class="price">¥1,150</div>
 
-        <button class="order"
-            onclick="addToCart('Choila Set',1150)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Choila Set',1150)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="khaja">
 
-    <h3>Taas Set (Mutton or Pork)</h3>
+<h3>Taas Set (Mutton or Pork)</h3>
 
-    <div class="japanese">
-        タスセット（マトンまたは豚肉）
-    </div>
+<div class="japanese">
+タスセット（マトンまたは豚肉）
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥1,100
-        </div>
+<div class="price">¥1,100</div>
 
-        <button class="order"
-            onclick="addToCart('Taas Set',1100)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Taas Set',1100)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="khaja">
 
-    <h3>Chatpate</h3>
+<h3>Chatpate</h3>
 
-    <div class="japanese">
-        チャトパテ
-    </div>
+<div class="japanese">
+チャトパテ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥500
-        </div>
+<div class="price">¥500</div>
 
-        <button class="order"
-            onclick="addToCart('Chatpate',500)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Chatpate',500)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="khaja">
 
-    <h3>Wai Wai Sadeko</h3>
+<h3>Wai Wai Sadeko</h3>
 
-    <div class="japanese">
-        ワイワイサデコ
-    </div>
+<div class="japanese">
+ワイワイサデコ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥400
-        </div>
+<div class="price">¥400</div>
 
-        <button class="order"
-            onclick="addToCart('Wai Wai Sadeko',400)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Wai Wai Sadeko',400)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="khaja">
 
-    <h3>Pani Puri</h3>
+<h3>Pani Puri</h3>
 
-    <div class="japanese">
-        パニプリ
-    </div>
+<div class="japanese">
+パニプリ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥500
-        </div>
+<div class="price">¥500</div>
 
-        <button class="order"
-            onclick="addToCart('Pani Puri',500)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Pani Puri',500)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="khaja">
 
-    <h3>Bhatmas Sadeko</h3>
+<h3>Bhatmas Sadeko</h3>
 
-    <div class="japanese">
-        バッタマスサデコ
-    </div>
+<div class="japanese">
+バッタマスサデコ
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥400
-        </div>
+<div class="price">¥400</div>
 
-        <button class="order"
-            onclick="addToCart('Bhatmas Sadeko',400)">
-            Add
-        </button>
-
-    </div>
+<button class="order"
+onclick="addToCart('Bhatmas Sadeko',400)">
+Add
+</button>
 
 </div>
 
+</div>
 
-<!-- RICE -->
 
 <h2 class="category-title">
-    🍚 Rice
+🍚 Rice
 </h2>
 
 
 <div class="item" data-category="rice">
 
-    <h3>Fried Rice - Chicken</h3>
+<h3>Fried Rice - Chicken</h3>
 
-    <div class="japanese">
-        フライドライス・チキン
-    </div>
+<div class="japanese">
+フライドライス・チキン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥700
-        </div>
+<div class="price">¥700</div>
 
-        <button class="order"
-            onclick="addToCart('Fried Rice - Chicken',700)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Fried Rice - Chicken',700)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="rice">
 
-    <h3>Fried Rice - Veg</h3>
+<h3>Fried Rice - Veg</h3>
 
-    <div class="japanese">
-        フライドライス・野菜
-    </div>
+<div class="japanese">
+フライドライス・野菜
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥650
-        </div>
+<div class="price">¥650</div>
 
-        <button class="order"
-            onclick="addToCart('Fried Rice - Veg',650)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Fried Rice - Veg',650)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="rice">
 
-    <h3>Biryani - Mutton</h3>
+<h3>Biryani - Mutton</h3>
 
-    <div class="japanese">
-        ビリヤニ・マトン
-    </div>
+<div class="japanese">
+ビリヤニ・マトン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥1,050
-        </div>
+<div class="price">¥1,050</div>
 
-        <button class="order"
-            onclick="addToCart('Biryani - Mutton',1050)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Biryani - Mutton',1050)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="rice">
 
-    <h3>Biryani - Chicken</h3>
+<h3>Biryani - Chicken</h3>
 
-    <div class="japanese">
-        ビリヤニ・チキン
-    </div>
+<div class="japanese">
+ビリヤニ・チキン
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥1,000
-        </div>
+<div class="price">¥1,000</div>
 
-        <button class="order"
-            onclick="addToCart('Biryani - Chicken',1000)">
-            Add
-        </button>
-
-    </div>
+<button class="order"
+onclick="addToCart('Biryani - Chicken',1000)">
+Add
+</button>
 
 </div>
 
+</div>
 
-<!-- CURRY -->
 
 <h2 class="category-title">
-    🍛 Curry
+🍛 Curry
 </h2>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Chicken Curry</h3>
+<h3>Chicken Curry</h3>
 
-    <div class="japanese">
-        チキンカレー
-    </div>
+<div class="japanese">
+チキンカレー
+</div>
 
-    <div class="description">
-        Choice of spice level available.
-    </div>
+<div class="price-row">
 
-    <div class="price-row">
+<div class="price">¥800</div>
 
-        <div class="price">
-            ¥800
-        </div>
+<button class="order"
+onclick="addToCart('Chicken Curry',800)">
+Add
+</button>
 
-        <button class="order"
-            onclick="addToCart('Chicken Curry',800)">
-            Add
-        </button>
-
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Butter Chicken Curry</h3>
+<h3>Butter Chicken Curry</h3>
 
-    <div class="japanese">
-        バターチキンカレー
-    </div>
+<div class="japanese">
+バターチキンカレー
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥850
-        </div>
+<div class="price">¥850</div>
 
-        <button class="order"
-            onclick="addToCart('Butter Chicken Curry',850)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Butter Chicken Curry',850)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Keema Curry</h3>
+<h3>Keema Curry</h3>
 
-    <div class="japanese">
-        キーマカレー
-    </div>
+<div class="japanese">
+キーマカレー
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥780
-        </div>
+<div class="price">¥780</div>
 
-        <button class="order"
-            onclick="addToCart('Keema Curry',780)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Keema Curry',780)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Vegetable Curry</h3>
+<h3>Vegetable Curry</h3>
 
-    <div class="japanese">
-        野菜カレー
-    </div>
+<div class="japanese">
+野菜カレー
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥750
-        </div>
+<div class="price">¥750</div>
 
-        <button class="order"
-            onclick="addToCart('Vegetable Curry',750)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Vegetable Curry',750)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Daal Curry</h3>
+<h3>Daal Curry</h3>
 
-    <div class="japanese">
-        豆（ダル）カレー
-    </div>
+<div class="japanese">
+豆（ダル）カレー
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥600
-        </div>
+<div class="price">¥600</div>
 
-        <button class="order"
-            onclick="addToCart('Daal Curry',600)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Daal Curry',600)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Chicken Sag Curry</h3>
+<h3>Chicken Sag Curry</h3>
 
-    <div class="japanese">
-        チキンほうれん草カレー
-    </div>
+<div class="japanese">
+チキンほうれん草カレー
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥850
-        </div>
+<div class="price">¥850</div>
 
-        <button class="order"
-            onclick="addToCart('Chicken Sag Curry',850)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Chicken Sag Curry',850)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Pork Curry</h3>
+<h3>Pork Curry</h3>
 
-    <div class="japanese">
-        豚肉カレー
-    </div>
+<div class="japanese">
+豚肉カレー
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥850
-        </div>
+<div class="price">¥850</div>
 
-        <button class="order"
-            onclick="addToCart('Pork Curry',850)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Pork Curry',850)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Mutton Curry</h3>
+<h3>Mutton Curry</h3>
 
-    <div class="japanese">
-        マトンカレー
-    </div>
+<div class="japanese">
+マトンカレー
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥890
-        </div>
+<div class="price">¥890</div>
 
-        <button class="order"
-            onclick="addToCart('Mutton Curry',890)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Mutton Curry',890)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Mix Seafood Curry</h3>
+<h3>Mix Seafood Curry</h3>
 
-    <div class="japanese">
-        ミックスシーフードカレー
-    </div>
+<div class="japanese">
+ミックスシーフードカレー
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥900
-        </div>
+<div class="price">¥900</div>
 
-        <button class="order"
-            onclick="addToCart('Mix Seafood Curry',900)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Mix Seafood Curry',900)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Chicken Tikka Masala Curry</h3>
+<h3>Chicken Tikka Masala Curry</h3>
 
-    <div class="japanese">
-        チキンティッカマサラカレー
-    </div>
+<div class="japanese">
+チキンティッカマサラカレー
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥900
-        </div>
+<div class="price">¥900</div>
 
-        <button class="order"
-            onclick="addToCart('Chicken Tikka Masala Curry',900)">
-            Add
-        </button>
+<button class="order"
+onclick="addToCart('Chicken Tikka Masala Curry',900)">
+Add
+</button>
 
-    </div>
+</div>
 
 </div>
 
 
 <div class="item" data-category="curry">
 
-    <h3>Butter Shrimp Curry</h3>
+<h3>Butter Shrimp Curry</h3>
 
-    <div class="japanese">
-        バターエビカレー
-    </div>
+<div class="japanese">
+バターエビカレー
+</div>
 
-    <div class="price-row">
+<div class="price-row">
 
-        <div class="price">
-            ¥820
-        </div>
+<div class="price">¥820</div>
 
-        <button class="order"
-            onclick="addToCart('Butter Shrimp Curry',820)">
-            Add
-        </button>
-
-    </div>
+<button class="order"
+onclick="addToCart('Butter Shrimp Curry',820)">
+Add
+</button>
 
 </div>
 
+</div>
 
-<!-- SPICE -->
 
 <div class="spice-box">
 
-    <h3>
-        🌶️ Choice of Spicy Level
-    </h3>
+<h3>
+🌶️ Choice of Spicy Level
+</h3>
 
-    <label>
-        <input type="radio" name="spice" value="Normal Spicy" checked>
-        普通 — Normal Spicy
-    </label>
+<label>
+<input type="radio" name="spice" value="Normal Spicy" checked>
+普通 — Normal Spicy
+</label>
 
-    <label>
-        <input type="radio" name="spice" value="Medium Spicy">
-        中辛 — Medium Spicy
-    </label>
+<label>
+<input type="radio" name="spice" value="Medium Spicy">
+中辛 — Medium Spicy
+</label>
 
-    <label>
-        <input type="radio" name="spice" value="Spicy">
-        辛口 — Spicy
-    </label>
+<label>
+<input type="radio" name="spice" value="Spicy">
+辛口 — Spicy
+</label>
 
-    <label>
-        <input type="radio" name="spice" value="Extremely Spicy">
-        激辛 — Extremely Spicy
-    </label>
+<label>
+<input type="radio" name="spice" value="Extremely Spicy">
+激辛 — Extremely Spicy
+</label>
 
 </div>
-
 
 </main>
 
 
-<!-- CART -->
+<div id="cartWindow" class="cart-window">
+
+<div class="cart-box">
+
+<div class="cart-header">
+
+<h2>
+🛒 Your Order
+</h2>
+
+<button
+class="close-cart"
+onclick="closeCart()">
+×
+</button>
+
+</div>
+
+
+<div id="cartItems">
+<p>Your cart is empty.</p>
+</div>
+
+
+<div class="customer-details">
+
+<h3>
+Your Details
+</h3>
+
+<input
+id="tableNumber"
+type="text"
+placeholder="Table number"
+readonly>
+
+<input
+id="customerName"
+type="text"
+placeholder="Your name (optional)">
+
+</div>
+
+
+<div class="cart-summary">
+
+<span>
+Total
+</span>
+
+<span>
+¥<span id="cartWindowTotal">0</span>
+</span>
+
+</div>
+
+
+<button
+class="place-order"
+onclick="placeOrder()">
+
+✅ Place Order
+
+</button>
+
 
 <div
-    id="cartWindow"
-    class="cart-window">
+id="orderStatus"
+class="status">
+</div>
 
-
-    <div class="cart-box">
-
-
-        <div class="cart-header">
-
-            <h2>
-                🛒 Your Order
-            </h2>
-
-            <button
-                class="close-cart"
-                onclick="closeCart()">
-
-                ×
-
-            </button>
-
-        </div>
-
-
-        <div id="cartItems">
-
-            <p>
-                Your cart is empty.
-            </p>
-
-        </div>
-
-
-        <div class="customer-details">
-
-            <h3>
-                Your Details
-            </h3>
-
-            <input
-                id="tableNumber"
-                type="text"
-                placeholder="Table number">
-
-            <input
-                id="customerName"
-                type="text"
-                placeholder="Your name (optional)">
-
-        </div>
-
-
-        <div class="cart-summary">
-
-            <span>
-                Total
-            </span>
-
-            <span>
-                ¥<span id="cartWindowTotal">0</span>
-            </span>
-
-        </div>
-
-
-        <button
-            class="place-order"
-            onclick="placeOrder()">
-
-            ✅ Place Order
-
-        </button>
-
-
-        <div
-            id="orderStatus"
-            class="status">
-        </div>
-
-
-    </div>
+</div>
 
 </div>
 
 
 <footer>
 
-    <h2>
-        Sasurali Ghar
-    </h2>
+<h2>
+Sasurali Ghar
+</h2>
 
-    <p>
-        🇳🇵 Authentic Nepalese Restaurant
-    </p>
+<p>
+🇳🇵 Authentic Nepalese Restaurant
+</p>
 
-    <p>
-        📍 Wajiro, Fukuoka
-    </p>
+<p>
+📍 Wajiro, Fukuoka
+</p>
 
-    <p>
-        Thank you for visiting!
-    </p>
+<p>
+Thank you for visiting!
+</p>
 
 </footer>
 
 
 <script>
 
-
 let cart = [];
 
+let restaurantTable = "Not specified";
+
+
+/* READ TABLE FROM QR URL */
+
+function getTableFromURL() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const table =
+        params.get("table");
+
+
+    if (!table) {
+
+        restaurantTable =
+            "Not specified";
+
+        document.getElementById(
+            "tableDisplay"
+        ).innerText =
+            "Menu";
+
+        document.getElementById(
+            "tableNumber"
+        ).value = "";
+
+        return;
+
+    }
+
+
+    if (
+        table.toLowerCase() ===
+        "counter"
+    ) {
+
+        restaurantTable =
+            "Counter";
+
+    }
+
+    else {
+
+        restaurantTable =
+            "Table " + table;
+
+    }
+
+
+    document.getElementById(
+        "tableDisplay"
+    ).innerText =
+        restaurantTable;
+
+
+    document.getElementById(
+        "tableNumber"
+    ).value =
+        restaurantTable;
+
+}
+
+
+/* CART */
 
 function addToCart(name, price) {
 
     const existingItem =
         cart.find(function(item) {
+
             return item.name === name;
+
         });
 
 
@@ -1596,9 +1573,11 @@ function addToCart(name, price) {
     else {
 
         cart.push({
+
             name: name,
             price: price,
             quantity: 1
+
         });
 
     }
@@ -1606,7 +1585,9 @@ function addToCart(name, price) {
 
     updateCart();
 
-    alert(name + " added to cart!");
+    alert(
+        name + " added to cart!"
+    );
 
 }
 
@@ -1614,29 +1595,38 @@ function addToCart(name, price) {
 function updateCart() {
 
     let totalItems = 0;
+
     let totalPrice = 0;
 
 
     cart.forEach(function(item) {
 
-        totalItems += item.quantity;
+        totalItems +=
+            item.quantity;
 
         totalPrice +=
-            item.price * item.quantity;
+            item.price *
+            item.quantity;
 
     });
 
 
-    document.getElementById("cartCount")
-        .innerText = totalItems;
+    document.getElementById(
+        "cartCount"
+    ).innerText =
+        totalItems;
 
 
-    document.getElementById("cartTotal")
-        .innerText = totalPrice;
+    document.getElementById(
+        "cartTotal"
+    ).innerText =
+        totalPrice;
 
 
-    document.getElementById("cartWindowTotal")
-        .innerText = totalPrice;
+    document.getElementById(
+        "cartWindowTotal"
+    ).innerText =
+        totalPrice;
 
 
     displayCart();
@@ -1647,7 +1637,9 @@ function updateCart() {
 function displayCart() {
 
     const cartItems =
-        document.getElementById("cartItems");
+        document.getElementById(
+            "cartItems"
+        );
 
 
     if (cart.length === 0) {
@@ -1663,71 +1655,87 @@ function displayCart() {
     cartItems.innerHTML = "";
 
 
-    cart.forEach(function(item, index) {
+    cart.forEach(
+        function(item, index) {
 
-        const itemTotal =
-            item.price * item.quantity;
-
-
-        const div =
-            document.createElement("div");
+            const itemTotal =
+                item.price *
+                item.quantity;
 
 
-        div.className = "cart-item";
+            const div =
+                document.createElement(
+                    "div"
+                );
 
 
-        div.innerHTML = `
+            div.className =
+                "cart-item";
 
-            <div class="cart-item-name">
-                ${item.name}
-            </div>
 
-            <div>
-                ¥${itemTotal}
-            </div>
+            div.innerHTML = `
 
-            <div class="quantity">
+                <div class="cart-item-name">
+                    ${item.name}
+                </div>
 
-                <button
+                <div>
+                    ¥${itemTotal}
+                </div>
+
+                <div class="quantity">
+
+                    <button
                     onclick="changeQuantity(${index}, -1)">
                     −
-                </button>
+                    </button>
 
-                <span>
+                    <span>
                     ${item.quantity}
-                </span>
+                    </span>
 
-                <button
+                    <button
                     onclick="changeQuantity(${index}, 1)">
                     +
-                </button>
+                    </button>
 
-                <button
+                    <button
                     class="remove"
                     onclick="removeItem(${index})">
                     🗑️
-                </button>
+                    </button>
 
-            </div>
+                </div>
+            `;
 
-        `;
 
+            cartItems.appendChild(
+                div
+            );
 
-        cartItems.appendChild(div);
-
-    });
+        }
+    );
 
 }
 
 
-function changeQuantity(index, amount) {
+function changeQuantity(
+    index,
+    amount
+) {
 
-    cart[index].quantity += amount;
+    cart[index].quantity +=
+        amount;
 
 
-    if (cart[index].quantity <= 0) {
+    if (
+        cart[index].quantity <= 0
+    ) {
 
-        cart.splice(index, 1);
+        cart.splice(
+            index,
+            1
+        );
 
     }
 
@@ -1739,7 +1747,10 @@ function changeQuantity(index, amount) {
 
 function removeItem(index) {
 
-    cart.splice(index, 1);
+    cart.splice(
+        index,
+        1
+    );
 
     updateCart();
 
@@ -1748,16 +1759,20 @@ function removeItem(index) {
 
 function openCart() {
 
-    document.getElementById("cartWindow")
-        .style.display = "block";
+    document.getElementById(
+        "cartWindow"
+    ).style.display =
+        "block";
 
 }
 
 
 function closeCart() {
 
-    document.getElementById("cartWindow")
-        .style.display = "none";
+    document.getElementById(
+        "cartWindow"
+    ).style.display =
+        "none";
 
 }
 
@@ -1769,27 +1784,8 @@ async function placeOrder() {
 
     if (cart.length === 0) {
 
-        alert("Your cart is empty.");
-
-        return;
-
-    }
-
-
-    const table =
-        document.getElementById("tableNumber")
-            .value.trim();
-
-
-    const name =
-        document.getElementById("customerName")
-            .value.trim();
-
-
-    if (table === "") {
-
         alert(
-            "Please enter your table number."
+            "Your cart is empty."
         );
 
         return;
@@ -1800,17 +1796,22 @@ async function placeOrder() {
     let orderText = "";
 
 
-    cart.forEach(function(item) {
+    cart.forEach(
+        function(item) {
 
-        orderText +=
-            item.name +
-            " × " +
-            item.quantity +
-            " = ¥" +
-            (item.price * item.quantity) +
-            "\n";
+            orderText +=
+                item.name +
+                " × " +
+                item.quantity +
+                " = ¥" +
+                (
+                    item.price *
+                    item.quantity
+                ) +
+                "\n";
 
-    });
+        }
+    );
 
 
     const total =
@@ -1843,13 +1844,16 @@ async function placeOrder() {
 
     formData.append(
         "table_number",
-        table
+        restaurantTable
     );
 
 
     formData.append(
         "customer_name",
-        name || "Not provided"
+        document.getElementById(
+            "customerName"
+        ).value ||
+        "Not provided"
     );
 
 
@@ -1867,7 +1871,8 @@ async function placeOrder() {
 
     formData.append(
         "_subject",
-        "New Sasurali Ghar Restaurant Order"
+        "New Sasurali Ghar Restaurant Order - " +
+        restaurantTable
     );
 
 
@@ -1890,14 +1895,14 @@ async function placeOrder() {
                     method: "POST",
                     body: formData,
                     headers: {
-                        "Accept": "application/json"
+                        "Accept":
+                            "application/json"
                     }
                 }
             );
 
 
         if (response.ok) {
-
 
             status.innerText =
                 "✅ Order sent successfully!";
@@ -1915,23 +1920,15 @@ async function placeOrder() {
 
 
             document.getElementById(
-                "tableNumber"
-            ).value = "";
-
-
-            document.getElementById(
                 "customerName"
             ).value = "";
-
 
         }
 
         else {
 
-
             status.innerText =
                 "❌ Could not send the order.";
-
 
             alert(
                 "The order could not be sent. Please try again."
@@ -1939,15 +1936,12 @@ async function placeOrder() {
 
         }
 
-
     }
 
     catch (error) {
 
-
         status.innerText =
             "❌ Connection error.";
-
 
         alert(
             "Please check your internet connection and try again."
@@ -1960,8 +1954,9 @@ async function placeOrder() {
 
 /* LANGUAGE */
 
-function changeLanguage(language) {
-
+function changeLanguage(
+    language
+) {
 
     const description =
         document.getElementById(
@@ -1989,19 +1984,15 @@ function changeLanguage(language) {
 
     if (language === "ja") {
 
-
         description.innerText =
             "本格ネパール料理レストラン";
-
 
         welcome.innerText =
             "ようこそ";
 
-
         englishButton.classList.remove(
             "active"
         );
-
 
         japaneseButton.classList.add(
             "active"
@@ -2011,19 +2002,15 @@ function changeLanguage(language) {
 
     else {
 
-
         description.innerText =
             "Authentic Nepalese Restaurant";
-
 
         welcome.innerText =
             "स्वागत छ • Welcome";
 
-
         japaneseButton.classList.remove(
             "active"
         );
-
 
         englishButton.classList.add(
             "active"
@@ -2038,7 +2025,6 @@ function changeLanguage(language) {
 
 function searchMenu() {
 
-
     const search =
         document.getElementById(
             "searchBox"
@@ -2051,33 +2037,40 @@ function searchMenu() {
         );
 
 
-    items.forEach(function(item) {
+    items.forEach(
+        function(item) {
 
-        const text =
-            item.innerText.toLowerCase();
+            const text =
+                item.innerText.toLowerCase();
 
 
-        if (text.includes(search)) {
+            if (
+                text.includes(search)
+            ) {
 
-            item.style.display = "block";
+                item.style.display =
+                    "block";
+
+            }
+
+            else {
+
+                item.style.display =
+                    "none";
+
+            }
 
         }
-
-        else {
-
-            item.style.display = "none";
-
-        }
-
-    });
+    );
 
 }
 
 
 /* CATEGORY */
 
-function showCategory(category) {
-
+function showCategory(
+    category
+) {
 
     const items =
         document.querySelectorAll(
@@ -2085,30 +2078,40 @@ function showCategory(category) {
         );
 
 
-    items.forEach(function(item) {
+    items.forEach(
+        function(item) {
 
-        if (
-            category === "all" ||
-            item.dataset.category === category
-        ) {
+            if (
+                category === "all" ||
+                item.dataset.category ===
+                category
+            ) {
 
-            item.style.display = "block";
+                item.style.display =
+                    "block";
+
+            }
+
+            else {
+
+                item.style.display =
+                    "none";
+
+            }
 
         }
-
-        else {
-
-            item.style.display = "none";
-
-        }
-
-    });
+    );
 
 }
 
+
+/* START */
+
+getTableFromURL();
+
+updateCart();
+
 </script>
 
-
 </body>
-
 </html>
