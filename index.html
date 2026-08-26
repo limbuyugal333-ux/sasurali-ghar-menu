@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,8 +20,6 @@ body {
     background: #f7f3ed;
     color: #222;
 }
-
-/* HEADER */
 
 header {
     background: linear-gradient(135deg, #7b1e1e, #b13b2e);
@@ -46,7 +45,29 @@ header p {
     font-size: 18px;
 }
 
-/* LANGUAGE */
+.cart-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+    padding: 14px 18px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.cart-button {
+    border: none;
+    background: #7b1e1e;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.cart-total {
+    margin-left: 15px;
+}
 
 .languages {
     background: white;
@@ -69,8 +90,6 @@ header p {
     color: white;
 }
 
-/* SEARCH */
-
 .search {
     text-align: center;
     padding: 15px;
@@ -84,8 +103,6 @@ header p {
     border: 1px solid #ccc;
     font-size: 16px;
 }
-
-/* CATEGORIES */
 
 .categories {
     display: flex;
@@ -108,8 +125,6 @@ header p {
     background: #7b1e1e;
     color: white;
 }
-
-/* MENU */
 
 .menu {
     max-width: 700px;
@@ -160,21 +175,123 @@ header p {
     font-weight: bold;
 }
 
-.veg {
-    color: green;
-    font-size: 13px;
-}
-
 .order {
     background: #7b1e1e;
     color: white;
     border: none;
-    padding: 10px 16px;
+    padding: 10px 18px;
     border-radius: 20px;
     cursor: pointer;
 }
 
-/* FOOTER */
+.cart-window {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.cart-box {
+    background: white;
+    width: 92%;
+    max-width: 600px;
+    margin: 40px auto;
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-cart {
+    border: none;
+    background: #eee;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.cart-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.cart-item-name {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.quantity button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: #7b1e1e;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.remove {
+    margin-left: auto;
+    background: #ddd !important;
+    color: #222 !important;
+}
+
+.customer-details {
+    margin-top: 20px;
+}
+
+.customer-details input {
+    width: 100%;
+    padding: 13px;
+    margin: 7px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.cart-summary {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #222;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.place-order {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #7b1e1e;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.status {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
 
 footer {
     background: #222;
@@ -183,16 +300,6 @@ footer {
     padding: 30px 15px;
     margin-top: 40px;
 }
-
-footer h2 {
-    margin-top: 0;
-}
-
-footer p {
-    margin: 8px;
-}
-
-/* MOBILE */
 
 @media (max-width: 500px) {
 
@@ -204,17 +311,17 @@ footer p {
         font-size: 19px;
     }
 
+    .cart-box {
+        margin: 20px auto;
+    }
+
 }
 
 </style>
 
 </head>
 
-
 <body>
-
-
-<!-- HEADER -->
 
 <header>
 
@@ -237,7 +344,25 @@ footer p {
 </header>
 
 
-<!-- LANGUAGE BUTTONS -->
+<div class="cart-bar">
+
+    <button
+        class="cart-button"
+        onclick="openCart()">
+
+        🛒 Cart:
+        <span id="cartCount">0</span>
+
+    </button>
+
+    <span class="cart-total">
+
+        Total ¥<span id="cartTotal">0</span>
+
+    </span>
+
+</div>
+
 
 <div class="languages">
 
@@ -250,7 +375,6 @@ footer p {
 
     </button>
 
-
     <button
         id="japaneseButton"
         onclick="changeLanguage('ja')">
@@ -262,8 +386,6 @@ footer p {
 </div>
 
 
-<!-- SEARCH -->
-
 <div class="search">
 
     <input
@@ -274,8 +396,6 @@ footer p {
 
 </div>
 
-
-<!-- CATEGORIES -->
 
 <div class="categories">
 
@@ -325,12 +445,8 @@ footer p {
 </div>
 
 
-<!-- MENU -->
-
 <main class="menu">
 
-
-<!-- CURRY -->
 
 <h2 class="category-title">
     🍛 Curry
@@ -357,8 +473,12 @@ footer p {
             ¥900
         </div>
 
-        <button class="order">
-            Order
+        <button
+            class="order"
+            onclick="addToCart('Chicken Curry', 900)">
+
+            Add
+
         </button>
 
     </div>
@@ -386,16 +506,18 @@ footer p {
             ¥850
         </div>
 
-        <button class="order">
-            Order
+        <button
+            class="order"
+            onclick="addToCart('Vegetable Curry', 850)">
+
+            Add
+
         </button>
 
     </div>
 
 </div>
 
-
-<!-- NAAN -->
 
 <h2 class="category-title">
     🫓 Naan
@@ -422,16 +544,18 @@ footer p {
             ¥350
         </div>
 
-        <button class="order">
-            Order
+        <button
+            class="order"
+            onclick="addToCart('Plain Naan', 350)">
+
+            Add
+
         </button>
 
     </div>
 
 </div>
 
-
-<!-- MOMO -->
 
 <h2 class="category-title">
     🥟 Momo
@@ -458,16 +582,18 @@ footer p {
             ¥700
         </div>
 
-        <button class="order">
-            Order
+        <button
+            class="order"
+            onclick="addToCart('Chicken Momo', 700)">
+
+            Add
+
         </button>
 
     </div>
 
 </div>
 
-
-<!-- RICE -->
 
 <h2 class="category-title">
     🍚 Rice
@@ -494,16 +620,18 @@ footer p {
             ¥700
         </div>
 
-        <button class="order">
-            Order
+        <button
+            class="order"
+            onclick="addToCart('Fried Rice', 700)">
+
+            Add
+
         </button>
 
     </div>
 
 </div>
 
-
-<!-- DRINKS -->
 
 <h2 class="category-title">
     🥤 Drinks
@@ -526,8 +654,12 @@ footer p {
             ¥300
         </div>
 
-        <button class="order">
-            Order
+        <button
+            class="order"
+            onclick="addToCart('Cola', 300)">
+
+            Add
+
         </button>
 
     </div>
@@ -538,7 +670,93 @@ footer p {
 </main>
 
 
-<!-- FOOTER -->
+<!-- CART WINDOW -->
+
+<div
+    id="cartWindow"
+    class="cart-window">
+
+
+    <div class="cart-box">
+
+
+        <div class="cart-header">
+
+            <h2>
+                🛒 Your Order
+            </h2>
+
+            <button
+                class="close-cart"
+                onclick="closeCart()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div id="cartItems">
+
+            <p>
+                Your cart is empty.
+            </p>
+
+        </div>
+
+
+        <div class="customer-details">
+
+            <h3>
+                Your Details
+            </h3>
+
+            <input
+                id="tableNumber"
+                type="text"
+                placeholder="Table number">
+
+            <input
+                id="customerName"
+                type="text"
+                placeholder="Your name (optional)">
+
+        </div>
+
+
+        <div class="cart-summary">
+
+            <span>
+                Total
+            </span>
+
+            <span>
+                ¥<span id="cartWindowTotal">0</span>
+            </span>
+
+        </div>
+
+
+        <button
+            class="place-order"
+            onclick="placeOrder()">
+
+            ✅ Place Order
+
+        </button>
+
+
+        <div
+            id="orderStatus"
+            class="status">
+        </div>
+
+
+    </div>
+
+</div>
+
 
 <footer>
 
@@ -561,54 +779,469 @@ footer p {
 </footer>
 
 
-<!-- JAVASCRIPT -->
-
 <script>
+
+
+/* CART */
+
+let cart = [];
+
+
+function addToCart(name, price) {
+
+    const existingItem =
+        cart.find(function(item) {
+
+            return item.name === name;
+
+        });
+
+
+    if (existingItem) {
+
+        existingItem.quantity++;
+
+    }
+
+    else {
+
+        cart.push({
+
+            name: name,
+
+            price: price,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    updateCart();
+
+    alert(name + " added to cart!");
+
+}
+
+
+function updateCart() {
+
+    let totalItems = 0;
+
+    let totalPrice = 0;
+
+
+    cart.forEach(function(item) {
+
+        totalItems += item.quantity;
+
+        totalPrice +=
+            item.price * item.quantity;
+
+    });
+
+
+    document.getElementById(
+        "cartCount"
+    ).innerText = totalItems;
+
+
+    document.getElementById(
+        "cartTotal"
+    ).innerText = totalPrice;
+
+
+    document.getElementById(
+        "cartWindowTotal"
+    ).innerText = totalPrice;
+
+
+    displayCart();
+
+}
+
+
+function displayCart() {
+
+    const cartItems =
+        document.getElementById(
+            "cartItems"
+        );
+
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML =
+            "<p>Your cart is empty.</p>";
+
+        return;
+
+    }
+
+
+    cartItems.innerHTML = "";
+
+
+    cart.forEach(function(item, index) {
+
+        const itemTotal =
+            item.price * item.quantity;
+
+
+        const div =
+            document.createElement("div");
+
+
+        div.className =
+            "cart-item";
+
+
+        div.innerHTML = `
+
+            <div class="cart-item-name">
+                ${item.name}
+            </div>
+
+            <div>
+                ¥${itemTotal}
+            </div>
+
+            <div class="quantity">
+
+                <button
+                    onclick="changeQuantity(${index}, -1)">
+                    −
+                </button>
+
+                <span>
+                    ${item.quantity}
+                </span>
+
+                <button
+                    onclick="changeQuantity(${index}, 1)">
+                    +
+                </button>
+
+                <button
+                    class="remove"
+                    onclick="removeItem(${index})">
+                    🗑️
+                </button>
+
+            </div>
+        `;
+
+
+        cartItems.appendChild(div);
+
+    });
+
+}
+
+
+function changeQuantity(index, amount) {
+
+    cart[index].quantity += amount;
+
+
+    if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
+
+    }
+
+
+    updateCart();
+
+}
+
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+
+}
+
+
+function openCart() {
+
+    document.getElementById(
+        "cartWindow"
+    ).style.display = "block";
+
+}
+
+
+function closeCart() {
+
+    document.getElementById(
+        "cartWindow"
+    ).style.display = "none";
+
+}
+
+
+/* SEND ORDER TO FORMSPREE */
+
+async function placeOrder() {
+
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty.");
+
+        return;
+
+    }
+
+
+    const table =
+        document.getElementById(
+            "tableNumber"
+        ).value.trim();
+
+
+    const name =
+        document.getElementById(
+            "customerName"
+        ).value.trim();
+
+
+    if (table === "") {
+
+        alert(
+            "Please enter your table number."
+        );
+
+        return;
+
+    }
+
+
+    let orderText = "";
+
+
+    cart.forEach(function(item) {
+
+        orderText +=
+
+            item.name +
+            " × " +
+            item.quantity +
+            " = ¥" +
+            (item.price * item.quantity) +
+            "\n";
+
+    });
+
+
+    const total =
+        cart.reduce(
+            function(sum, item) {
+
+                return sum +
+                    item.price *
+                    item.quantity;
+
+            },
+            0
+        );
+
+
+    const formData = new FormData();
+
+
+    formData.append(
+        "table_number",
+        table
+    );
+
+
+    formData.append(
+        "customer_name",
+        name || "Not provided"
+    );
+
+
+    formData.append(
+        "order",
+        orderText
+    );
+
+
+    formData.append(
+        "total",
+        "¥" + total
+    );
+
+
+    formData.append(
+        "_subject",
+        "New Sasurali Ghar Restaurant Order"
+    );
+
+
+    const status =
+        document.getElementById(
+            "orderStatus"
+        );
+
+
+    status.innerText =
+        "Sending order...";
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "https://formspree.io/f/xoeagryl",
+                {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                }
+            );
+
+
+        if (response.ok) {
+
+
+            status.innerText =
+                "✅ Order sent successfully!";
+
+
+            alert(
+                "Thank you! Your order has been sent to the restaurant."
+            );
+
+
+            cart = [];
+
+
+            updateCart();
+
+
+            document.getElementById(
+                "tableNumber"
+            ).value = "";
+
+
+            document.getElementById(
+                "customerName"
+            ).value = "";
+
+
+        }
+
+        else {
+
+
+            status.innerText =
+                "❌ Could not send the order.";
+
+            alert(
+                "The order could not be sent. Please try again."
+            );
+
+        }
+
+
+    }
+
+    catch (error) {
+
+
+        status.innerText =
+            "❌ Connection error.";
+
+
+        alert(
+            "Please check your internet connection and try again."
+        );
+
+    }
+
+}
 
 
 /* LANGUAGE */
 
 function changeLanguage(language) {
 
+
     const description =
-        document.getElementById("restaurant-description");
+        document.getElementById(
+            "restaurant-description"
+        );
+
 
     const welcome =
-        document.querySelector(".welcome");
+        document.querySelector(
+            ".welcome"
+        );
+
 
     const englishButton =
-        document.getElementById("englishButton");
+        document.getElementById(
+            "englishButton"
+        );
+
 
     const japaneseButton =
-        document.getElementById("japaneseButton");
+        document.getElementById(
+            "japaneseButton"
+        );
 
 
     if (language === "ja") {
 
+
         description.innerText =
             "本格ネパール料理レストラン";
+
 
         welcome.innerText =
             "ようこそ";
 
-        englishButton.classList.remove("active");
 
-        japaneseButton.classList.add("active");
+        englishButton.classList.remove(
+            "active"
+        );
+
+
+        japaneseButton.classList.add(
+            "active"
+        );
 
     }
 
 
     else {
 
+
         description.innerText =
             "Authentic Nepalese Restaurant";
+
 
         welcome.innerText =
             "स्वागत छ • Welcome";
 
-        japaneseButton.classList.remove("active");
 
-        englishButton.classList.add("active");
+        japaneseButton.classList.remove(
+            "active"
+        );
+
+
+        englishButton.classList.add(
+            "active"
+        );
 
     }
 
@@ -619,17 +1252,24 @@ function changeLanguage(language) {
 
 function searchMenu() {
 
+
     const search =
         document
-        .getElementById("searchBox")
+        .getElementById(
+            "searchBox"
+        )
         .value
         .toLowerCase();
 
+
     const items =
-        document.querySelectorAll(".item");
+        document.querySelectorAll(
+            ".item"
+        );
 
 
     items.forEach(function(item) {
+
 
         const text =
             item.innerText.toLowerCase();
@@ -637,13 +1277,15 @@ function searchMenu() {
 
         if (text.includes(search)) {
 
-            item.style.display = "block";
+            item.style.display =
+                "block";
 
         }
 
         else {
 
-            item.style.display = "none";
+            item.style.display =
+                "none";
 
         }
 
@@ -652,35 +1294,40 @@ function searchMenu() {
 }
 
 
-/* CATEGORY FILTER */
+/* CATEGORY */
 
 function showCategory(category) {
 
+
     const items =
-        document.querySelectorAll(".item");
+        document.querySelectorAll(
+            ".item"
+        );
 
 
     items.forEach(function(item) {
+
 
         if (
             category === "all" ||
             item.dataset.category === category
         ) {
 
-            item.style.display = "block";
+            item.style.display =
+                "block";
 
         }
 
         else {
 
-            item.style.display = "none";
+            item.style.display =
+                "none";
 
         }
 
     });
 
 }
-
 
 </script>
 
