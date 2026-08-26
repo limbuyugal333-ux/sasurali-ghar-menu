@@ -1,680 +1,530 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2870
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\deftab560
-\pard\pardeftab560\slleading20\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="en">
 
-\f0\fs26 \cf0 <!DOCTYPE html>\
-<html lang="en">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-\
-    <title>Sasurali Ghar | Nepalese Restaurant</title>\
-\
-    <style>\
-        * \{\
-            box-sizing: border-box;\
-        \}\
-\
-        body \{\
-            margin: 0;\
-            font-family: Arial, Helvetica, sans-serif;\
-            background: #f7f3ed;\
-            color: #222;\
-        \}\
-\
-        /* HEADER */\
-        header \{\
-            background: #7b1e1e;\
-            color: white;\
-            text-align: center;\
-            padding: 30px 15px;\
-        \}\
-\
-        .restaurant-name \{\
-            font-size: 32px;\
-            font-weight: bold;\
-            margin-bottom: 8px;\
-        \}\
-\
-        .subtitle \{\
-            font-size: 16px;\
-        \}\
-\
-        /* LANGUAGE BUTTONS */\
-        .languages \{\
-            text-align: center;\
-            padding: 15px;\
-            background: white;\
-        \}\
-\
-        .languages button \{\
-            border: none;\
-            background: #eee;\
-            padding: 10px 18px;\
-            margin: 3px;\
-            border-radius: 20px;\
-            cursor: pointer;\
-        \}\
-\
-        .languages button.active \{\
-            background: #7b1e1e;\
-            color: white;\
-        \}\
-\
-        /* SEARCH */\
-        .search-box \{\
-            padding: 15px;\
-            text-align: center;\
-        \}\
-\
-        .search-box input \{\
-            width: 90%;\
-            max-width: 500px;\
-            padding: 14px;\
-            border: 1px solid #ccc;\
-            border-radius: 25px;\
-            font-size: 16px;\
-        \}\
-\
-        /* CATEGORY BUTTONS */\
-        .categories \{\
-            display: flex;\
-            overflow-x: auto;\
-            gap: 8px;\
-            padding: 10px 15px;\
-            background: white;\
-        \}\
-\
-        .categories button \{\
-            white-space: nowrap;\
-            border: none;\
-            padding: 10px 16px;\
-            border-radius: 20px;\
-            background: #eee;\
-            cursor: pointer;\
-        \}\
-\
-        .categories button.active \{\
-            background: #7b1e1e;\
-            color: white;\
-        \}\
-\
-        /* MENU */\
-        .menu \{\
-            max-width: 700px;\
-            margin: auto;\
-            padding: 15px;\
-        \}\
-\
-        .category-title \{\
-            margin-top: 25px;\
-            color: #7b1e1e;\
-            border-bottom: 2px solid #7b1e1e;\
-            padding-bottom: 8px;\
-        \}\
-\
-        .item \{\
-            background: white;\
-            margin: 15px 0;\
-            border-radius: 12px;\
-            overflow: hidden;\
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);\
-        \}\
-\
-        .item-image \{\
-            width: 100%;\
-            height: 200px;\
-            object-fit: cover;\
-            background: #ddd;\
-        \}\
-\
-        .item-content \{\
-            padding: 16px;\
-        \}\
-\
-        .item-name \{\
-            font-size: 20px;\
-            font-weight: bold;\
-        \}\
-\
-        .japanese-name \{\
-            color: #777;\
-            margin-top: 4px;\
-        \}\
-\
-        .description \{\
-            color: #666;\
-            margin: 10px 0;\
-            line-height: 1.5;\
-        \}\
-\
-        .bottom-row \{\
-            display: flex;\
-            justify-content: space-between;\
-            align-items: center;\
-        \}\
-\
-        .price \{\
-            font-size: 20px;\
-            font-weight: bold;\
-            color: #7b1e1e;\
-        \}\
-\
-        .veg \{\
-            color: green;\
-            font-size: 14px;\
-            margin-left: 8px;\
-        \}\
-\
-        .order-button \{\
-            background: #7b1e1e;\
-            color: white;\
-            border: none;\
-            padding: 10px 15px;\
-            border-radius: 20px;\
-            cursor: pointer;\
-        \}\
-\
-        /* FOOTER */\
-        footer \{\
-            margin-top: 40px;\
-            padding: 30px 15px;\
-            text-align: center;\
-            background: #222;\
-            color: white;\
-        \}\
-\
-        footer p \{\
-            margin: 8px;\
-        \}\
-\
-        /* MOBILE */\
-        @media (max-width: 500px) \{\
-\
-            .restaurant-name \{\
-                font-size: 27px;\
-            \}\
-\
-            .item-image \{\
-                height: 180px;\
-            \}\
-\
-            .item-name \{\
-                font-size: 18px;\
-            \}\
-        \}\
-    </style>\
-</head>\
-\
-<body>\
-\
-    <!-- HEADER -->\
-    <header>\
-\
-        <div class="restaurant-name">\
-            \uc0\u55356 \u57179  Sasurali Ghar\
-        </div>\
-\
-        <div class="subtitle">\
-            Nepalese Restaurant\
-        </div>\
-\
-        <div class="subtitle">\
-            Welcome! \uc0\u2360 \u2381 \u2357 \u2366 \u2327 \u2340  \u2331 !\
-        </div>\
-\
-    </header>\
-\
-\
-    <!-- LANGUAGE -->\
-    <div class="languages">\
-\
-        <button class="active" onclick="changeLanguage('en')">\
-            English\
-        </button>\
-\
-        <button onclick="changeLanguage('ja')">\
-            \uc0\u26085 \u26412 \u35486 \
-        </button>\
-\
-    </div>\
-\
-\
-    <!-- SEARCH -->\
-    <div class="search-box">\
-\
-        <input\
-            type="text"\
-            id="search"\
-            placeholder="Search menu..."\
-            onkeyup="searchMenu()"\
-        >\
-\
-    </div>\
-\
-\
-    <!-- CATEGORIES -->\
-    <div class="categories">\
-\
-        <button class="active" onclick="showCategory('all')">\
-            All\
-        </button>\
-\
-        <button onclick="showCategory('curry')">\
-            Curry\
-        </button>\
-\
-        <button onclick="showCategory('naan')">\
-            Naan\
-        </button>\
-\
-        <button onclick="showCategory('momo')">\
-            Momo\
-        </button>\
-\
-        <button onclick="showCategory('rice')">\
-            Rice\
-        </button>\
-\
-        <button onclick="showCategory('drinks')">\
-            Drinks\
-        </button>\
-\
-    </div>\
-\
-\
-    <!-- MENU -->\
-    <main class="menu">\
-\
-        <h2 class="category-title">\
-            \uc0\u55356 \u57179  Curry\
-        </h2>\
-\
-\
-        <!-- ITEM 1 -->\
-        <div class="item" data-category="curry">\
-\
-            <img\
-                class="item-image"\
-                src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80"\
-                alt="Chicken Curry"\
-            >\
-\
-            <div class="item-content">\
-\
-                <div class="item-name">\
-                    Chicken Curry\
-                </div>\
-\
-                <div class="japanese-name">\
-                    \uc0\u12481 \u12461 \u12531 \u12459 \u12524 \u12540 \
-                </div>\
-\
-                <div class="description">\
-                    Delicious Nepalese-style chicken curry.\
-                </div>\
-\
-                <div class="bottom-row">\
-\
-                    <div class="price">\
-                        \'a5900\
-                    </div>\
-\
-                    <button\
-                        class="order-button"\
-                        onclick="orderItem('Chicken Curry')">\
-                        Order\
-                    </button>\
-\
-                </div>\
-\
-            </div>\
-\
-        </div>\
-\
-\
-        <!-- ITEM 2 -->\
-        <div class="item" data-category="curry">\
-\
-            <img\
-                class="item-image"\
-                src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=900&q=80"\
-                alt="Vegetable Curry"\
-            >\
-\
-            <div class="item-content">\
-\
-                <div class="item-name">\
-                    Vegetable Curry\
-                    <span class="veg">\uc0\u9679  Vegetarian</span>\
-                </div>\
-\
-                <div class="japanese-name">\
-                    \uc0\u37326 \u33756 \u12459 \u12524 \u12540 \
-                </div>\
-\
-                <div class="description">\
-                    Mixed vegetables cooked with Nepalese spices.\
-                </div>\
-\
-                <div class="bottom-row">\
-\
-                    <div class="price">\
-                        \'a5850\
-                    </div>\
-\
-                    <button\
-                        class="order-button"\
-                        onclick="orderItem('Vegetable Curry')">\
-                        Order\
-                    </button>\
-\
-                </div>\
-\
-            </div>\
-\
-        </div>\
-\
-\
-        <!-- NAAN -->\
-        <h2 class="category-title">\
-            \uc0\u55358 \u57043  Naan\
-        </h2>\
-\
-\
-        <div class="item" data-category="naan">\
-\
-            <img\
-                class="item-image"\
-                src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=80"\
-                alt="Naan"\
-            >\
-\
-            <div class="item-content">\
-\
-                <div class="item-name">\
-                    Plain Naan\
-                </div>\
-\
-                <div class="japanese-name">\
-                    \uc0\u12503 \u12524 \u12540 \u12531 \u12490 \u12531 \
-                </div>\
-\
-                <div class="description">\
-                    Freshly baked naan.\
-                </div>\
-\
-                <div class="bottom-row">\
-\
-                    <div class="price">\
-                        \'a5350\
-                    </div>\
-\
-                    <button\
-                        class="order-button"\
-                        onclick="orderItem('Plain Naan')">\
-                        Order\
-                    </button>\
-\
-                </div>\
-\
-            </div>\
-\
-        </div>\
-\
-\
-        <!-- MOMO -->\
-        <h2 class="category-title">\
-            \uc0\u55358 \u56671  Momo\
-        </h2>\
-\
-\
-        <div class="item" data-category="momo">\
-\
-            <img\
-                class="item-image"\
-                src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=900&q=80"\
-                alt="Momo"\
-            >\
-\
-            <div class="item-content">\
-\
-                <div class="item-name">\
-                    Chicken Momo\
-                </div>\
-\
-                <div class="japanese-name">\
-                    \uc0\u12481 \u12461 \u12531 \u12514 \u12514 \
-                </div>\
-\
-                <div class="description">\
-                    Nepalese steamed dumplings served with spicy sauce.\
-                </div>\
-\
-                <div class="bottom-row">\
-\
-                    <div class="price">\
-                        \'a5700\
-                    </div>\
-\
-                    <button\
-                        class="order-button"\
-                        onclick="orderItem('Chicken Momo')">\
-                        Order\
-                    </button>\
-\
-                </div>\
-\
-            </div>\
-\
-        </div>\
-\
-\
-        <!-- RICE -->\
-        <h2 class="category-title">\
-            \uc0\u55356 \u57178  Rice\
-        </h2>\
-\
-\
-        <div class="item" data-category="rice">\
-\
-            <img\
-                class="item-image"\
-                src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80"\
-                alt="Fried Rice"\
-            >\
-\
-            <div class="item-content">\
-\
-                <div class="item-name">\
-                    Fried Rice\
-                </div>\
-\
-                <div class="japanese-name">\
-                    \uc0\u12481 \u12515 \u12540 \u12495 \u12531 \
-                </div>\
-\
-                <div class="description">\
-                    Fragrant fried rice with vegetables.\
-                </div>\
-\
-                <div class="bottom-row">\
-\
-                    <div class="price">\
-                        \'a5700\
-                    </div>\
-\
-                    <button\
-                        class="order-button"\
-                        onclick="orderItem('Fried Rice')">\
-                        Order\
-                    </button>\
-\
-                </div>\
-\
-            </div>\
-\
-        </div>\
-\
-\
-        <!-- DRINK -->\
-        <h2 class="category-title">\
-            \uc0\u55358 \u56676  Drinks\
-        </h2>\
-\
-\
-        <div class="item" data-category="drinks">\
-\
-            <div class="item-content">\
-\
-                <div class="item-name">\
-                    Cola\
-                </div>\
-\
-                <div class="japanese-name">\
-                    \uc0\u12467 \u12540 \u12521 \
-                </div>\
-\
-                <div class="bottom-row">\
-\
-                    <div class="price">\
-                        \'a5300\
-                    </div>\
-\
-                    <button\
-                        class="order-button"\
-                        onclick="orderItem('Cola')">\
-                        Order\
-                    </button>\
-\
-                </div>\
-\
-            </div>\
-\
-        </div>\
-\
-    </main>\
-\
-\
-    <!-- FOOTER -->\
-    <footer>\
-\
-        <h3>Sasurali Ghar</h3>\
-\
-        <p>\uc0\u55356 \u56819 \u55356 \u56821  Nepalese Restaurant</p>\
-\
-        <p>\uc0\u55357 \u56525  Wajiro, Fukuoka</p>\
-\
-        <p>Thank you for visiting!</p>\
-\
-    </footer>\
-\
-\
-    <script>\
-\
-        /* CATEGORY FILTER */\
-\
-        function showCategory(category) \{\
-\
-            const items = document.querySelectorAll(".item");\
-\
-            items.forEach(function(item) \{\
-\
-                if (\
-                    category === "all" ||\
-                    item.dataset.category === category\
-                ) \{\
-\
-                    item.style.display = "block";\
-\
-                \} else \{\
-\
-                    item.style.display = "none";\
-\
-                \}\
-\
-            \});\
-\
-        \}\
-\
-\
-        /* SEARCH */\
-\
-        function searchMenu() \{\
-\
-            const search =\
-                document\
-                .getElementById("search")\
-                .value\
-                .toLowerCase();\
-\
-            const items =\
-                document.querySelectorAll(".item");\
-\
-            items.forEach(function(item) \{\
-\
-                const text =\
-                    item.innerText.toLowerCase();\
-\
-                if (text.includes(search)) \{\
-\
-                    item.style.display = "block";\
-\
-                \} else \{\
-\
-                    item.style.display = "none";\
-\
-                \}\
-\
-            \});\
-\
-        \}\
-\
-\
-        /* ORDER BUTTON */\
-\
-        function orderItem(itemName) \{\
-\
-            alert(\
-                "You selected: " +\
-                itemName +\
-                "\\n\\nOrdering system will be added later."\
-            );\
-\
-        \}\
-\
-\
-        /* LANGUAGE */\
-\
-        function changeLanguage(language) \{\
-\
-            if (language === "ja") \{\
-\
-                alert(\
-                    "Japanese menu will be added next."\
-                );\
-\
-            \} else \{\
-\
-                alert(\
-                    "English menu selected."\
-                );\
-\
-            \}\
-\
-        \}\
-\
-    </script>\
-\
-</body>\
-</html>\
-Chicken Curry \'97 \'a5900\
-Mutton Curry \'97 \'a51,000\
-Butter Chicken \'97 \'a5950\
-Cheese Naan \'97 \'a5500\
-Chicken Momo \'97 \'a5700\
-Lassi \'97 \'a5400}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sasurali Ghar | Nepalese Restaurant</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f3ed;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        header {
+            background: linear-gradient(135deg, #7b1e1e, #b13b2e);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .logo {
+            font-size: 45px;
+        }
+
+        header h1 {
+            margin: 8px 0;
+            font-size: 34px;
+        }
+
+        header p {
+            margin: 6px 0;
+        }
+
+        .welcome {
+            font-size: 18px;
+        }
+
+        /* LANGUAGE */
+
+        .languages {
+            background: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .languages button {
+            border: none;
+            padding: 10px 20px;
+            margin: 4px;
+            border-radius: 20px;
+            cursor: pointer;
+            background: #eeeeee;
+            font-size: 15px;
+        }
+
+        .languages button.active {
+            background: #7b1e1e;
+            color: white;
+        }
+
+        /* SEARCH */
+
+        .search {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .search input {
+            width: 90%;
+            max-width: 550px;
+            padding: 14px 20px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        /* CATEGORY */
+
+        .categories {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 10px 15px;
+            background: white;
+        }
+
+        .categories button {
+            white-space: nowrap;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            background: #eeeeee;
+            cursor: pointer;
+        }
+
+        .categories button.active {
+            background: #7b1e1e;
+            color: white;
+        }
+
+        /* MENU */
+
+        .menu {
+            max-width: 700px;
+            margin: auto;
+            padding: 15px;
+        }
+
+        .category-title {
+            color: #7b1e1e;
+            border-bottom: 2px solid #7b1e1e;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+
+        /* FOOD CARD */
+
+        .item {
+            background: white;
+            border-radius: 14px;
+            margin: 15px 0;
+            padding: 18px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .item h3 {
+            margin: 0;
+            font-size: 21px;
+        }
+
+        .japanese {
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .description {
+            color: #666;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            color: #7b1e1e;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .veg {
+            color: green;
+            font-size: 13px;
+        }
+
+        .order {
+            background: #7b1e1e;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+            margin-top: 40px;
+        }
+
+        footer h2 {
+            margin-top: 0;
+        }
+
+        footer p {
+            margin: 8px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 500px) {
+
+            header h1 {
+                font-size: 29px;
+            }
+
+            .item h3 {
+                font-size: 19px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            🇳🇵
+        </div>
+
+        <h1>
+            Sasurali Ghar
+        </h1>
+
+        <p>
+            Authentic Nepalese Restaurant
+        </p>
+
+        <p class="welcome">
+            स्वागत छ • Welcome
+        </p>
+
+    </header>
+
+
+    <!-- LANGUAGE -->
+
+    <div class="languages">
+
+        <button class="active">
+            🇬🇧 English
+        </button>
+
+        <button>
+            🇯🇵 日本語
+        </button>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search">
+
+        <input
+            type="text"
+            placeholder="Search menu..."
+        >
+
+    </div>
+
+
+    <!-- CATEGORIES -->
+
+    <div class="categories">
+
+        <button class="active">
+            All
+        </button>
+
+        <button>
+            🍛 Curry
+        </button>
+
+        <button>
+            🫓 Naan
+        </button>
+
+        <button>
+            🥟 Momo
+        </button>
+
+        <button>
+            🍚 Rice
+        </button>
+
+        <button>
+            🥤 Drinks
+        </button>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <main class="menu">
+
+
+        <h2 class="category-title">
+            🍛 Curry
+        </h2>
+
+
+        <div class="item">
+
+            <h3>
+                Chicken Curry
+            </h3>
+
+            <div class="japanese">
+                チキンカレー
+            </div>
+
+            <div class="description">
+                Delicious Nepalese-style chicken curry.
+            </div>
+
+            <div class="price-row">
+
+                <div class="price">
+                    ¥900
+                </div>
+
+                <button class="order">
+                    Order
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="item">
+
+            <h3>
+                Vegetable Curry
+                <span class="veg">
+                    ● Vegetarian
+                </span>
+            </h3>
+
+            <div class="japanese">
+                野菜カレー
+            </div>
+
+            <div class="description">
+                Mixed vegetables cooked with Nepalese spices.
+            </div>
+
+            <div class="price-row">
+
+                <div class="price">
+                    ¥850
+                </div>
+
+                <button class="order">
+                    Order
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <h2 class="category-title">
+            🫓 Naan
+        </h2>
+
+
+        <div class="item">
+
+            <h3>
+                Plain Naan
+            </h3>
+
+            <div class="japanese">
+                プレーンナン
+            </div>
+
+            <div class="description">
+                Freshly baked naan.
+            </div>
+
+            <div class="price-row">
+
+                <div class="price">
+                    ¥350
+                </div>
+
+                <button class="order">
+                    Order
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <h2 class="category-title">
+            🥟 Momo
+        </h2>
+
+
+        <div class="item">
+
+            <h3>
+                Chicken Momo
+            </h3>
+
+            <div class="japanese">
+                チキンモモ
+            </div>
+
+            <div class="description">
+                Nepalese steamed dumplings with spicy sauce.
+            </div>
+
+            <div class="price-row">
+
+                <div class="price">
+                    ¥700
+                </div>
+
+                <button class="order">
+                    Order
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <h2 class="category-title">
+            🍚 Rice
+        </h2>
+
+
+        <div class="item">
+
+            <h3>
+                Fried Rice
+            </h3>
+
+            <div class="japanese">
+                チャーハン
+            </div>
+
+            <div class="description">
+                Fragrant fried rice with vegetables.
+            </div>
+
+            <div class="price-row">
+
+                <div class="price">
+                    ¥700
+                </div>
+
+                <button class="order">
+                    Order
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <h2 class="category-title">
+            🥤 Drinks
+        </h2>
+
+
+        <div class="item">
+
+            <h3>
+                Cola
+            </h3>
+
+            <div class="japanese">
+                コーラ
+            </div>
+
+            <div class="price-row">
+
+                <div class="price">
+                    ¥300
+                </div>
+
+                <button class="order">
+                    Order
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h2>
+            Sasurali Ghar
+        </h2>
+
+        <p>
+            🇳🇵 Authentic Nepalese Restaurant
+        </p>
+
+        <p>
+            📍 Wajiro, Fukuoka
+        </p>
+
+        <p>
+            Thank you for visiting!
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
