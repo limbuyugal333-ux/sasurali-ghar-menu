@@ -1,463 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Sasurali Ghar | Nepalese Restaurant</title>
+<title>Sasurali Ghar - Nepalese Restaurant</title>
 
 <style>
+*{box-sizing:border-box}
 
-* {
-    box-sizing: border-box;
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f7f3ed;
+color:#222;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f7f3ed;
-    color: #222;
+header{
+background:linear-gradient(135deg,#7b1e1e,#b13b2e);
+color:white;
+text-align:center;
+padding:30px 15px;
 }
 
-header {
-    background: linear-gradient(135deg, #7b1e1e, #b13b2e);
-    color: white;
-    text-align: center;
-    padding: 35px 20px;
+header h1{
+font-size:34px;
+margin:8px 0;
 }
 
-.logo {
-    font-size: 48px;
+.logo{
+font-size:45px;
 }
 
-header h1 {
-    margin: 8px 0;
-    font-size: 34px;
+.welcome{
+font-size:19px;
 }
 
-header p {
-    margin: 7px 0;
+.table-display{
+display:inline-block;
+background:white;
+color:#7b1e1e;
+padding:10px 20px;
+border-radius:25px;
+font-weight:bold;
+margin-top:10px;
 }
 
-.welcome {
-    font-size: 19px;
+.cart-bar{
+position:sticky;
+top:0;
+z-index:100;
+background:white;
+padding:12px;
+text-align:center;
+box-shadow:0 2px 8px #aaa;
 }
 
-.table-display {
-    display: inline-block;
-    margin-top: 12px;
-    background: white;
-    color: #7b1e1e;
-    padding: 9px 18px;
-    border-radius: 25px;
-    font-weight: bold;
+.cart-button{
+background:#7b1e1e;
+color:white;
+border:0;
+padding:10px 18px;
+border-radius:20px;
+cursor:pointer;
 }
 
-.cart-bar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: white;
-    padding: 14px 18px;
-    text-align: center;
-    font-weight: bold;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+.cart-total{
+margin-left:12px;
+font-weight:bold;
 }
 
-.cart-button {
-    border: none;
-    background: #7b1e1e;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 15px;
+.languages{
+background:white;
+text-align:center;
+padding:12px;
 }
 
-.cart-total {
-    margin-left: 15px;
+.languages button{
+border:0;
+padding:10px 18px;
+margin:3px;
+border-radius:20px;
+cursor:pointer;
 }
 
-.languages {
-    background: white;
-    text-align: center;
-    padding: 15px;
+.languages .active{
+background:#7b1e1e;
+color:white;
 }
 
-.languages button {
-    border: none;
-    padding: 10px 20px;
-    margin: 4px;
-    border-radius: 20px;
-    background: #eeeeee;
-    cursor: pointer;
-    font-size: 15px;
+.search{
+text-align:center;
+padding:15px;
 }
 
-.languages button.active {
-    background: #7b1e1e;
-    color: white;
+.search input{
+width:90%;
+max-width:600px;
+padding:13px 18px;
+border:1px solid #ccc;
+border-radius:25px;
+font-size:16px;
 }
 
-.search {
-    text-align: center;
-    padding: 15px;
+.categories{
+display:flex;
+gap:8px;
+overflow-x:auto;
+padding:10px;
+background:white;
 }
 
-.search input {
-    width: 90%;
-    max-width: 550px;
-    padding: 14px 20px;
-    border-radius: 25px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+.categories button{
+white-space:nowrap;
+border:0;
+padding:10px 16px;
+border-radius:20px;
+cursor:pointer;
 }
 
-.categories {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding: 10px 15px;
-    background: white;
+.categories button.active{
+background:#7b1e1e;
+color:white;
 }
 
-.categories button {
-    white-space: nowrap;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 20px;
-    background: #eeeeee;
-    cursor: pointer;
+.menu{
+max-width:750px;
+margin:auto;
+padding:15px;
 }
 
-.categories button.active {
-    background: #7b1e1e;
-    color: white;
+.category-title{
+color:#7b1e1e;
+border-bottom:2px solid #7b1e1e;
+padding-bottom:8px;
+margin-top:30px;
 }
 
-.menu {
-    max-width: 750px;
-    margin: auto;
-    padding: 15px;
+.item{
+background:white;
+margin:15px 0;
+padding:18px;
+border-radius:14px;
+box-shadow:0 3px 10px #ddd;
 }
 
-.category-title {
-    color: #7b1e1e;
-    border-bottom: 2px solid #7b1e1e;
-    padding-bottom: 8px;
-    margin-top: 30px;
+.item h3{
+margin:0;
+font-size:20px;
 }
 
-.item {
-    background: white;
-    border-radius: 14px;
-    margin: 15px 0;
-    padding: 18px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+.japanese{
+color:#777;
+margin-top:5px;
 }
 
-.item h3 {
-    margin: 0;
-    font-size: 21px;
+.description{
+color:#666;
+margin:10px 0;
 }
 
-.japanese {
-    color: #777;
-    margin-top: 5px;
-    font-size: 15px;
+.price-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-.description {
-    color: #666;
-    line-height: 1.5;
-    margin: 10px 0;
+.price{
+font-size:20px;
+font-weight:bold;
+color:#7b1e1e;
 }
 
-.price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.order{
+background:#7b1e1e;
+color:white;
+border:0;
+padding:10px 18px;
+border-radius:20px;
+cursor:pointer;
 }
 
-.price {
-    color: #7b1e1e;
-    font-size: 21px;
-    font-weight: bold;
+.cart-window{
+display:none;
+position:fixed;
+inset:0;
+background:#0008;
+z-index:1000;
+overflow-y:auto;
 }
 
-.order {
-    background: #7b1e1e;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 20px;
-    cursor: pointer;
+.cart-box{
+background:white;
+width:92%;
+max-width:600px;
+margin:25px auto;
+padding:20px;
+border-radius:18px;
 }
 
-.cart-window {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: 2000;
-    overflow-y: auto;
+.cart-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-.cart-box {
-    background: white;
-    width: 92%;
-    max-width: 600px;
-    margin: 30px auto;
-    border-radius: 18px;
-    padding: 22px;
+.close-cart{
+border:0;
+border-radius:50%;
+width:38px;
+height:38px;
+font-size:20px;
+cursor:pointer;
 }
 
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.cart-item{
+padding:15px 0;
+border-bottom:1px solid #ddd;
 }
 
-.close-cart {
-    border: none;
-    background: #eee;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
+.cart-item-name{
+font-weight:bold;
 }
 
-.cart-item {
-    border-bottom: 1px solid #ddd;
-    padding: 15px 0;
+.quantity{
+display:flex;
+align-items:center;
+gap:12px;
+margin-top:10px;
 }
 
-.cart-item-name {
-    font-weight: bold;
-    font-size: 17px;
+.quantity button{
+width:32px;
+height:32px;
+border:0;
+border-radius:50%;
+background:#7b1e1e;
+color:white;
+font-size:18px;
 }
 
-.quantity {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 10px;
+.customer-details{
+margin-top:20px;
 }
 
-.quantity button {
-    width: 32px;
-    height: 32px;
-    border: none;
-    border-radius: 50%;
-    background: #7b1e1e;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
+.customer-details input{
+width:100%;
+padding:13px;
+margin:6px 0;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
 }
 
-.remove {
-    margin-left: auto;
-    background: #ddd !important;
-    color: #222 !important;
+.customer-details input[readonly]{
+background:#eee;
+font-weight:bold;
 }
 
-.customer-details {
-    margin-top: 20px;
+.cart-summary{
+display:flex;
+justify-content:space-between;
+font-size:20px;
+font-weight:bold;
+border-top:2px solid #222;
+padding-top:15px;
+margin-top:15px;
 }
 
-.customer-details input {
-    width: 100%;
-    padding: 13px;
-    margin: 7px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
+.place-order{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:0;
+border-radius:10px;
+background:#7b1e1e;
+color:white;
+font-size:18px;
+cursor:pointer;
 }
 
-.customer-details input[readonly] {
-    background: #eeeeee;
-    font-weight: bold;
+.spice-box{
+background:#fff5e6;
+padding:15px;
+margin-top:20px;
+border-radius:10px;
 }
 
-.cart-summary {
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 2px solid #222;
-    display: flex;
-    justify-content: space-between;
-    font-size: 20px;
-    font-weight: bold;
+.spice-box label{
+display:block;
+margin:8px 0;
 }
 
-.spice-box {
-    margin-top: 20px;
-    padding: 15px;
-    background: #fff5e6;
-    border-radius: 10px;
+.status{
+text-align:center;
+font-weight:bold;
+margin-top:15px;
 }
 
-.spice-box label {
-    display: block;
-    margin: 8px 0;
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:30px;
+margin-top:40px;
 }
-
-.place-order {
-    width: 100%;
-    margin-top: 20px;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    background: #7b1e1e;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.status {
-    text-align: center;
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-footer {
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 30px 15px;
-    margin-top: 40px;
-}
-
-@media (max-width: 500px) {
-
-    header h1 {
-        font-size: 29px;
-    }
-
-    .item h3 {
-        font-size: 19px;
-    }
-
-    .cart-box {
-        margin: 15px auto;
-    }
-
-}
-
 </style>
-
 </head>
 
 <body>
 
 <header>
 
-    <div class="logo">
-        🇳🇵
-    </div>
+<div class="logo">🇳🇵</div>
 
-    <h1>
-        Sasurali Ghar
-    </h1>
+<h1>Sasurali Ghar</h1>
 
-    <p id="restaurant-description">
-        Authentic Nepalese Restaurant
-    </p>
+<p id="restaurantDescription">
+Authentic Nepalese Restaurant
+</p>
 
-    <p class="welcome">
-        स्वागत छ • Welcome
-    </p>
+<p class="welcome">
+स्वागत छ • Welcome
+</p>
 
-    <div class="table-display">
-        🪑 <span id="tableDisplay">Menu</span>
-    </div>
+<div class="table-display">
+🪑 <span id="tableDisplay">Menu</span>
+</div>
 
 </header>
 
 
 <div class="cart-bar">
 
-    <button
-        class="cart-button"
-        onclick="openCart()">
+<button class="cart-button" onclick="openCart()">
+🛒 Cart: <span id="cartCount">0</span>
+</button>
 
-        🛒 Cart:
-        <span id="cartCount">0</span>
-
-    </button>
-
-    <span class="cart-total">
-
-        Total ¥<span id="cartTotal">0</span>
-
-    </span>
+<span class="cart-total">
+Total ¥<span id="cartTotal">0</span>
+</span>
 
 </div>
 
 
 <div class="languages">
 
-    <button
-        id="englishButton"
-        class="active"
-        onclick="changeLanguage('en')">
+<button id="englishButton"
+class="active"
+onclick="changeLanguage('en')">
+🇬🇧 English
+</button>
 
-        🇬🇧 English
-
-    </button>
-
-    <button
-        id="japaneseButton"
-        onclick="changeLanguage('ja')">
-
-        🇯🇵 日本語
-
-    </button>
+<button id="japaneseButton"
+onclick="changeLanguage('ja')">
+🇯🇵 日本語
+</button>
 
 </div>
 
 
 <div class="search">
 
-    <input
-        id="searchBox"
-        type="text"
-        placeholder="Search menu..."
-        onkeyup="searchMenu()">
+<input
+id="searchBox"
+type="text"
+placeholder="Search menu..."
+onkeyup="searchMenu()">
 
 </div>
 
 
 <div class="categories">
 
-    <button class="active" onclick="showCategory('all')">
-        All
-    </button>
+<button class="active" onclick="showCategory('all')">
+All
+</button>
 
-    <button onclick="showCategory('naan')">
-        🫓 Naan
-    </button>
+<button onclick="showCategory('naan')">
+🫓 Naan
+</button>
 
-    <button onclick="showCategory('noodles')">
-        🍜 Noodles
-    </button>
+<button onclick="showCategory('noodles')">
+🍜 Noodles
+</button>
 
-    <button onclick="showCategory('momo')">
-        🥟 Momo
-    </button>
+<button onclick="showCategory('momo')">
+🥟 Momo
+</button>
 
-    <button onclick="showCategory('khaja')">
-        🥙 Khaja
-    </button>
+<button onclick="showCategory('khaja')">
+🥙 Khaja
+</button>
 
-    <button onclick="showCategory('rice')">
-        🍚 Rice
-    </button>
+<button onclick="showCategory('rice')">
+🍚 Rice
+</button>
 
-    <button onclick="showCategory('curry')">
-        🍛 Curry
-    </button>
+<button onclick="showCategory('curry')">
+🍛 Curry
+</button>
 
 </div>
 
@@ -465,899 +406,534 @@ footer {
 <main class="menu">
 
 
-<h2 class="category-title">
-    🫓 Naan
-</h2>
+<h2 class="category-title">🫓 Naan</h2>
 
 
 <div class="item" data-category="naan">
-
 <h3>Plain Naan</h3>
-
-<div class="japanese">
-プレーンナン
-</div>
+<div class="japanese">プレーンナン</div>
 
 <div class="price-row">
-
 <div class="price">¥300</div>
-
-<button class="order"
-onclick="addToCart('Plain Naan',300)">
+<button class="order" onclick="addToCart('Plain Naan',300)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="naan">
-
 <h3>Cheese Naan</h3>
-
-<div class="japanese">
-チーズナン
-</div>
+<div class="japanese">チーズナン</div>
 
 <div class="price-row">
-
 <div class="price">¥500</div>
-
-<button class="order"
-onclick="addToCart('Cheese Naan',500)">
+<button class="order" onclick="addToCart('Cheese Naan',500)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="naan">
-
 <h3>Keema Naan</h3>
-
-<div class="japanese">
-キーマナン
-</div>
+<div class="japanese">キーマナン</div>
 
 <div class="price-row">
-
 <div class="price">¥500</div>
-
-<button class="order"
-onclick="addToCart('Keema Naan',500)">
+<button class="order" onclick="addToCart('Keema Naan',500)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="naan">
-
 <h3>Garlic Naan</h3>
-
-<div class="japanese">
-ガーリックナン
-</div>
+<div class="japanese">ガーリックナン</div>
 
 <div class="price-row">
-
 <div class="price">¥350</div>
-
-<button class="order"
-onclick="addToCart('Garlic Naan',350)">
+<button class="order" onclick="addToCart('Garlic Naan',350)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="naan">
-
 <h3>Aalu Naan</h3>
-
-<div class="japanese">
-じゃがいもナン
-</div>
+<div class="japanese">じゃがいもナン</div>
 
 <div class="price-row">
-
 <div class="price">¥400</div>
-
-<button class="order"
-onclick="addToCart('Aalu Naan',400)">
+<button class="order" onclick="addToCart('Aalu Naan',400)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="naan">
-
 <h3>Sesame Naan</h3>
-
-<div class="japanese">
-ゴマナン
-</div>
+<div class="japanese">ゴマナン</div>
 
 <div class="price-row">
-
 <div class="price">¥350</div>
-
-<button class="order"
-onclick="addToCart('Sesame Naan',350)">
+<button class="order" onclick="addToCart('Sesame Naan',350)">
 Add
 </button>
-
+</div>
 </div>
 
-</div>
 
-
-<h2 class="category-title">
-🍜 Chowmein & Thukpa
-</h2>
+<h2 class="category-title">🍜 Noodles</h2>
 
 
 <div class="item" data-category="noodles">
-
 <h3>Chowmein</h3>
-
-<div class="japanese">
-チャウミン
-</div>
+<div class="japanese">チャウミン</div>
 
 <div class="price-row">
-
 <div class="price">¥550</div>
-
-<button class="order"
-onclick="addToCart('Chowmein',550)">
+<button class="order" onclick="addToCart('Chowmein',550)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="noodles">
-
 <h3>Thukpa</h3>
-
-<div class="japanese">
-チュウパ
-</div>
+<div class="japanese">チュウパ</div>
 
 <div class="price-row">
-
 <div class="price">¥700</div>
-
-<button class="order"
-onclick="addToCart('Thukpa',700)">
+<button class="order" onclick="addToCart('Thukpa',700)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="noodles">
-
 <h3>Mix Thukpa</h3>
-
-<div class="japanese">
-ミックスチュウパ
-</div>
+<div class="japanese">ミックスチュウパ</div>
 
 <div class="price-row">
-
 <div class="price">¥750</div>
-
-<button class="order"
-onclick="addToCart('Mix Thukpa',750)">
+<button class="order" onclick="addToCart('Mix Thukpa',750)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="noodles">
-
 <h3>Mix Chowmein</h3>
-
-<div class="japanese">
-ミックスチャウミン
-</div>
+<div class="japanese">ミックスチャウミン</div>
 
 <div class="price-row">
-
 <div class="price">¥700</div>
-
-<button class="order"
-onclick="addToCart('Mix Chowmein',700)">
+<button class="order" onclick="addToCart('Mix Chowmein',700)">
 Add
 </button>
-
+</div>
 </div>
 
-</div>
 
-
-<h2 class="category-title">
-🥟 Momo
-</h2>
+<h2 class="category-title">🥟 Momo</h2>
 
 
 <div class="item" data-category="momo">
-
 <h3>Steam Momo</h3>
-
-<div class="japanese">
-スチームモモ
-</div>
+<div class="japanese">スチームモモ</div>
 
 <div class="price-row">
-
 <div class="price">¥600</div>
-
-<button class="order"
-onclick="addToCart('Steam Momo',600)">
+<button class="order" onclick="addToCart('Steam Momo',600)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="momo">
-
 <h3>Soup Momo</h3>
-
-<div class="japanese">
-スープモモ
-</div>
+<div class="japanese">スープモモ</div>
 
 <div class="price-row">
-
 <div class="price">¥700</div>
-
-<button class="order"
-onclick="addToCart('Soup Momo',700)">
+<button class="order" onclick="addToCart('Soup Momo',700)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="momo">
-
 <h3>Chilly Momo</h3>
-
-<div class="japanese">
-チリモモ
-</div>
+<div class="japanese">チリモモ</div>
 
 <div class="price-row">
-
 <div class="price">¥700</div>
-
-<button class="order"
-onclick="addToCart('Chilly Momo',700)">
+<button class="order" onclick="addToCart('Chilly Momo',700)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="momo">
-
 <h3>Fry Momo</h3>
-
-<div class="japanese">
-フライモモ
-</div>
+<div class="japanese">フライモモ</div>
 
 <div class="price-row">
-
 <div class="price">¥650</div>
-
-<button class="order"
-onclick="addToCart('Fry Momo',650)">
+<button class="order" onclick="addToCart('Fry Momo',650)">
 Add
 </button>
-
+</div>
 </div>
 
-</div>
 
-
-<h2 class="category-title">
-🥙 Khaja & Snacks
-</h2>
+<h2 class="category-title">🥙 Khaja & Snacks</h2>
 
 
 <div class="item" data-category="khaja">
-
 <h3>Samosa</h3>
-
-<div class="japanese">
-サモサ
-</div>
+<div class="japanese">サモサ</div>
 
 <div class="price-row">
-
 <div class="price">¥500</div>
-
-<button class="order"
-onclick="addToCart('Samosa',500)">
+<button class="order" onclick="addToCart('Samosa',500)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="khaja">
-
 <h3>Samosa Chat</h3>
-
-<div class="japanese">
-サモサチャット
-</div>
+<div class="japanese">サモサチャット</div>
 
 <div class="price-row">
-
 <div class="price">¥700</div>
-
-<button class="order"
-onclick="addToCart('Samosa Chat',700)">
+<button class="order" onclick="addToCart('Samosa Chat',700)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="khaja">
-
 <h3>Khaja Set (Bhutan)</h3>
-
-<div class="japanese">
-カザセット（ヤギの内臓）
-</div>
+<div class="japanese">カザセット（ヤギの内臓）</div>
 
 <div class="price-row">
-
-<div class="price">¥1,000</div>
-
-<button class="order"
-onclick="addToCart('Khaja Set (Bhutan)',1000)">
+<div class="price">¥1000</div>
+<button class="order" onclick="addToCart('Khaja Set (Bhutan)',1000)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="khaja">
-
 <h3>Sasurali Khaja Set</h3>
-
-<div class="japanese">
-サスラリカザセット（スクティとチキンチョイラ）
-</div>
+<div class="japanese">サスラリカザセット（スクティとチキンチョイラ）</div>
 
 <div class="price-row">
-
-<div class="price">¥1,500</div>
-
-<button class="order"
-onclick="addToCart('Sasurali Khaja Set',1500)">
+<div class="price">¥1500</div>
+<button class="order" onclick="addToCart('Sasurali Khaja Set',1500)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="khaja">
-
-<h3>Choila Set (Mutton or Chicken)</h3>
-
-<div class="japanese">
-チョイラセット（マトンまたはチキン）
-</div>
+<h3>Choila Set</h3>
+<div class="japanese">チョイラセット（マトンまたはチキン）</div>
 
 <div class="price-row">
-
-<div class="price">¥1,150</div>
-
-<button class="order"
-onclick="addToCart('Choila Set',1150)">
+<div class="price">¥1150</div>
+<button class="order" onclick="addToCart('Choila Set',1150)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="khaja">
-
-<h3>Taas Set (Mutton or Pork)</h3>
-
-<div class="japanese">
-タスセット（マトンまたは豚肉）
-</div>
+<h3>Taas Set</h3>
+<div class="japanese">タスセット（マトンまたは豚肉）</div>
 
 <div class="price-row">
-
-<div class="price">¥1,100</div>
-
-<button class="order"
-onclick="addToCart('Taas Set',1100)">
+<div class="price">¥1100</div>
+<button class="order" onclick="addToCart('Taas Set',1100)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="khaja">
-
 <h3>Chatpate</h3>
-
-<div class="japanese">
-チャトパテ
-</div>
+<div class="japanese">チャトパテ</div>
 
 <div class="price-row">
-
 <div class="price">¥500</div>
-
-<button class="order"
-onclick="addToCart('Chatpate',500)">
+<button class="order" onclick="addToCart('Chatpate',500)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="khaja">
-
 <h3>Wai Wai Sadeko</h3>
-
-<div class="japanese">
-ワイワイサデコ
-</div>
+<div class="japanese">ワイワイサデコ</div>
 
 <div class="price-row">
-
 <div class="price">¥400</div>
-
-<button class="order"
-onclick="addToCart('Wai Wai Sadeko',400)">
+<button class="order" onclick="addToCart('Wai Wai Sadeko',400)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="khaja">
-
 <h3>Pani Puri</h3>
-
-<div class="japanese">
-パニプリ
-</div>
+<div class="japanese">パニプリ</div>
 
 <div class="price-row">
-
 <div class="price">¥500</div>
-
-<button class="order"
-onclick="addToCart('Pani Puri',500)">
+<button class="order" onclick="addToCart('Pani Puri',500)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="khaja">
-
 <h3>Bhatmas Sadeko</h3>
-
-<div class="japanese">
-バッタマスサデコ
-</div>
+<div class="japanese">バッタマスサデコ</div>
 
 <div class="price-row">
-
 <div class="price">¥400</div>
-
-<button class="order"
-onclick="addToCart('Bhatmas Sadeko',400)">
+<button class="order" onclick="addToCart('Bhatmas Sadeko',400)">
 Add
 </button>
-
+</div>
 </div>
 
-</div>
 
-
-<h2 class="category-title">
-🍚 Rice
-</h2>
+<h2 class="category-title">🍚 Rice</h2>
 
 
 <div class="item" data-category="rice">
-
 <h3>Fried Rice - Chicken</h3>
-
-<div class="japanese">
-フライドライス・チキン
-</div>
+<div class="japanese">フライドライス・チキン</div>
 
 <div class="price-row">
-
 <div class="price">¥700</div>
-
-<button class="order"
-onclick="addToCart('Fried Rice - Chicken',700)">
+<button class="order" onclick="addToCart('Fried Rice Chicken',700)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="rice">
-
 <h3>Fried Rice - Veg</h3>
-
-<div class="japanese">
-フライドライス・野菜
-</div>
+<div class="japanese">フライドライス・野菜</div>
 
 <div class="price-row">
-
 <div class="price">¥650</div>
-
-<button class="order"
-onclick="addToCart('Fried Rice - Veg',650)">
+<button class="order" onclick="addToCart('Fried Rice Veg',650)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="rice">
-
 <h3>Biryani - Mutton</h3>
-
-<div class="japanese">
-ビリヤニ・マトン
-</div>
+<div class="japanese">ビリヤニ・マトン</div>
 
 <div class="price-row">
-
-<div class="price">¥1,050</div>
-
-<button class="order"
-onclick="addToCart('Biryani - Mutton',1050)">
+<div class="price">¥1050</div>
+<button class="order" onclick="addToCart('Biryani Mutton',1050)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="rice">
-
 <h3>Biryani - Chicken</h3>
-
-<div class="japanese">
-ビリヤニ・チキン
-</div>
+<div class="japanese">ビリヤニ・チキン</div>
 
 <div class="price-row">
-
-<div class="price">¥1,000</div>
-
-<button class="order"
-onclick="addToCart('Biryani - Chicken',1000)">
+<div class="price">¥1000</div>
+<button class="order" onclick="addToCart('Biryani Chicken',1000)">
 Add
 </button>
-
+</div>
 </div>
 
-</div>
 
-
-<h2 class="category-title">
-🍛 Curry
-</h2>
+<h2 class="category-title">🍛 Curry</h2>
 
 
 <div class="item" data-category="curry">
-
 <h3>Chicken Curry</h3>
-
-<div class="japanese">
-チキンカレー
-</div>
+<div class="japanese">チキンカレー</div>
 
 <div class="price-row">
-
 <div class="price">¥800</div>
-
-<button class="order"
-onclick="addToCart('Chicken Curry',800)">
+<button class="order" onclick="addToCart('Chicken Curry',800)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="curry">
-
 <h3>Butter Chicken Curry</h3>
-
-<div class="japanese">
-バターチキンカレー
-</div>
+<div class="japanese">バターチキンカレー</div>
 
 <div class="price-row">
-
 <div class="price">¥850</div>
-
-<button class="order"
-onclick="addToCart('Butter Chicken Curry',850)">
+<button class="order" onclick="addToCart('Butter Chicken Curry',850)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="curry">
-
 <h3>Keema Curry</h3>
-
-<div class="japanese">
-キーマカレー
-</div>
+<div class="japanese">キーマカレー</div>
 
 <div class="price-row">
-
 <div class="price">¥780</div>
-
-<button class="order"
-onclick="addToCart('Keema Curry',780)">
+<button class="order" onclick="addToCart('Keema Curry',780)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="curry">
-
 <h3>Vegetable Curry</h3>
-
-<div class="japanese">
-野菜カレー
-</div>
+<div class="japanese">野菜カレー</div>
 
 <div class="price-row">
-
 <div class="price">¥750</div>
-
-<button class="order"
-onclick="addToCart('Vegetable Curry',750)">
+<button class="order" onclick="addToCart('Vegetable Curry',750)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="curry">
-
 <h3>Daal Curry</h3>
-
-<div class="japanese">
-豆（ダル）カレー
-</div>
+<div class="japanese">豆（ダル）カレー</div>
 
 <div class="price-row">
-
 <div class="price">¥600</div>
-
-<button class="order"
-onclick="addToCart('Daal Curry',600)">
+<button class="order" onclick="addToCart('Daal Curry',600)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="curry">
-
 <h3>Chicken Sag Curry</h3>
-
-<div class="japanese">
-チキンほうれん草カレー
-</div>
+<div class="japanese">チキンほうれん草カレー</div>
 
 <div class="price-row">
-
 <div class="price">¥850</div>
-
-<button class="order"
-onclick="addToCart('Chicken Sag Curry',850)">
+<button class="order" onclick="addToCart('Chicken Sag Curry',850)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="curry">
-
 <h3>Pork Curry</h3>
-
-<div class="japanese">
-豚肉カレー
-</div>
+<div class="japanese">豚肉カレー</div>
 
 <div class="price-row">
-
 <div class="price">¥850</div>
-
-<button class="order"
-onclick="addToCart('Pork Curry',850)">
+<button class="order" onclick="addToCart('Pork Curry',850)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="curry">
-
 <h3>Mutton Curry</h3>
-
-<div class="japanese">
-マトンカレー
-</div>
+<div class="japanese">マトンカレー</div>
 
 <div class="price-row">
-
 <div class="price">¥890</div>
-
-<button class="order"
-onclick="addToCart('Mutton Curry',890)">
+<button class="order" onclick="addToCart('Mutton Curry',890)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="curry">
-
 <h3>Mix Seafood Curry</h3>
-
-<div class="japanese">
-ミックスシーフードカレー
-</div>
+<div class="japanese">ミックスシーフードカレー</div>
 
 <div class="price-row">
-
 <div class="price">¥900</div>
-
-<button class="order"
-onclick="addToCart('Mix Seafood Curry',900)">
+<button class="order" onclick="addToCart('Mix Seafood Curry',900)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="curry">
-
 <h3>Chicken Tikka Masala Curry</h3>
-
-<div class="japanese">
-チキンティッカマサラカレー
-</div>
+<div class="japanese">チキンティッカマサラカレー</div>
 
 <div class="price-row">
-
 <div class="price">¥900</div>
-
-<button class="order"
-onclick="addToCart('Chicken Tikka Masala Curry',900)">
+<button class="order" onclick="addToCart('Chicken Tikka Masala Curry',900)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="item" data-category="curry">
-
 <h3>Butter Shrimp Curry</h3>
-
-<div class="japanese">
-バターエビカレー
-</div>
+<div class="japanese">バターエビカレー</div>
 
 <div class="price-row">
-
 <div class="price">¥820</div>
-
-<button class="order"
-onclick="addToCart('Butter Shrimp Curry',820)">
+<button class="order" onclick="addToCart('Butter Shrimp Curry',820)">
 Add
 </button>
-
 </div>
-
 </div>
 
 
 <div class="spice-box">
 
-<h3>
-🌶️ Choice of Spicy Level
-</h3>
+<h3>🌶️ Choice of Spicy Level</h3>
 
 <label>
 <input type="radio" name="spice" value="Normal Spicy" checked>
@@ -1390,29 +966,21 @@ Add
 
 <div class="cart-header">
 
-<h2>
-🛒 Your Order
-</h2>
+<h2>🛒 Your Order</h2>
 
-<button
-class="close-cart"
-onclick="closeCart()">
-×
-</button>
+<button class="close-cart" onclick="closeCart()">×</button>
 
 </div>
 
 
 <div id="cartItems">
-<p>Your cart is empty.</p>
+Your cart is empty.
 </div>
 
 
 <div class="customer-details">
 
-<h3>
-Your Details
-</h3>
+<h3>Your Details</h3>
 
 <input
 id="tableNumber"
@@ -1430,9 +998,7 @@ placeholder="Your name (optional)">
 
 <div class="cart-summary">
 
-<span>
-Total
-</span>
+<span>Total</span>
 
 <span>
 ¥<span id="cartWindowTotal">0</span>
@@ -1441,19 +1007,11 @@ Total
 </div>
 
 
-<button
-class="place-order"
-onclick="placeOrder()">
-
+<button class="place-order" onclick="placeOrder()">
 ✅ Place Order
-
 </button>
 
-
-<div
-id="orderStatus"
-class="status">
-</div>
+<div id="orderStatus" class="status"></div>
 
 </div>
 
@@ -1462,652 +1020,481 @@ class="status">
 
 <footer>
 
-<h2>
-Sasurali Ghar
-</h2>
+<h2>Sasurali Ghar</h2>
 
-<p>
-🇳🇵 Authentic Nepalese Restaurant
-</p>
+<p>🇳🇵 Authentic Nepalese Restaurant</p>
 
-<p>
-📍 Wajiro, Fukuoka
-</p>
+<p>📍 Wajiro, Fukuoka</p>
 
-<p>
-Thank you for visiting!
-</p>
+<p>Thank you for visiting!</p>
 
 </footer>
 
 
 <script>
 
-let cart = [];
-
-let restaurantTable = "Not specified";
+let cart=[];
 
 
-/* READ TABLE FROM QR URL */
+/* =========================
+   TABLE / QR CODE SYSTEM
+========================= */
 
-function getTableFromURL() {
+function loadTable(){
 
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
+const params=
+new URLSearchParams(
+window.location.search
+);
 
-    const table =
-        params.get("table");
+const table=
+params.get("table");
 
+let tableName="Menu";
 
-    if (!table) {
+if(table){
 
-        restaurantTable =
-            "Not specified";
+if(table.toLowerCase()==="counter"){
 
-        document.getElementById(
-            "tableDisplay"
-        ).innerText =
-            "Menu";
+tableName="Counter";
 
-        document.getElementById(
-            "tableNumber"
-        ).value = "";
+}else{
 
-        return;
+tableName="Table "+table;
 
-    }
+}
 
+}
 
-    if (
-        table.toLowerCase() ===
-        "counter"
-    ) {
+document.getElementById(
+"tableDisplay"
+).textContent=tableName;
 
-        restaurantTable =
-            "Counter";
+document.getElementById(
+"tableNumber"
+).value=tableName;
 
-    }
+}
 
-    else {
-
-        restaurantTable =
-            "Table " + table;
-
-    }
+loadTable();
 
 
-    document.getElementById(
-        "tableDisplay"
-    ).innerText =
-        restaurantTable;
+/* =========================
+   CART
+========================= */
 
+function addToCart(name,price){
 
-    document.getElementById(
-        "tableNumber"
-    ).value =
-        restaurantTable;
+let item=
+cart.find(
+x=>x.name===name
+);
+
+if(item){
+
+item.quantity++;
+
+}else{
+
+cart.push({
+name:name,
+price:price,
+quantity:1
+});
+
+}
+
+updateCart();
 
 }
 
 
-/* CART */
+function updateCart(){
 
-function addToCart(name, price) {
+let count=0;
+let total=0;
 
-    const existingItem =
-        cart.find(function(item) {
+cart.forEach(item=>{
 
-            return item.name === name;
+count+=item.quantity;
 
-        });
+total+=
+item.price*
+item.quantity;
 
+});
 
-    if (existingItem) {
+document.getElementById(
+"cartCount"
+).textContent=count;
 
-        existingItem.quantity++;
+document.getElementById(
+"cartTotal"
+).textContent=total;
 
-    }
+document.getElementById(
+"cartWindowTotal"
+).textContent=total;
 
-    else {
-
-        cart.push({
-
-            name: name,
-            price: price,
-            quantity: 1
-
-        });
-
-    }
-
-
-    updateCart();
-
-    alert(
-        name + " added to cart!"
-    );
+displayCart();
 
 }
 
 
-function updateCart() {
+function displayCart(){
 
-    let totalItems = 0;
+const box=
+document.getElementById(
+"cartItems"
+);
 
-    let totalPrice = 0;
+if(cart.length===0){
 
+box.innerHTML=
+"<p>Your cart is empty.</p>";
 
-    cart.forEach(function(item) {
+return;
 
-        totalItems +=
-            item.quantity;
+}
 
-        totalPrice +=
-            item.price *
-            item.quantity;
+box.innerHTML="";
 
-    });
+cart.forEach(
+(item,index)=>{
 
+let div=
+document.createElement("div");
 
-    document.getElementById(
-        "cartCount"
-    ).innerText =
-        totalItems;
+div.className="cart-item";
 
+div.innerHTML=`
 
-    document.getElementById(
-        "cartTotal"
-    ).innerText =
-        totalPrice;
+<div class="cart-item-name">
+${item.name}
+</div>
 
+<div>
+¥${item.price*item.quantity}
+</div>
 
-    document.getElementById(
-        "cartWindowTotal"
-    ).innerText =
-        totalPrice;
+<div class="quantity">
 
+<button
+onclick="changeQuantity(${index},-1)">
+−
+</button>
 
-    displayCart();
+<span>${item.quantity}</span>
+
+<button
+onclick="changeQuantity(${index},1)">
++
+</button>
+
+<button
+onclick="removeItem(${index})">
+🗑️
+</button>
+
+</div>
+`;
+
+box.appendChild(div);
+
+});
 
 }
 
 
-function displayCart() {
+function changeQuantity(index,amount){
 
-    const cartItems =
-        document.getElementById(
-            "cartItems"
-        );
+cart[index].quantity+=amount;
 
+if(cart[index].quantity<=0){
 
-    if (cart.length === 0) {
+cart.splice(index,1);
 
-        cartItems.innerHTML =
-            "<p>Your cart is empty.</p>";
+}
 
-        return;
-
-    }
-
-
-    cartItems.innerHTML = "";
-
-
-    cart.forEach(
-        function(item, index) {
-
-            const itemTotal =
-                item.price *
-                item.quantity;
-
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.className =
-                "cart-item";
-
-
-            div.innerHTML = `
-
-                <div class="cart-item-name">
-                    ${item.name}
-                </div>
-
-                <div>
-                    ¥${itemTotal}
-                </div>
-
-                <div class="quantity">
-
-                    <button
-                    onclick="changeQuantity(${index}, -1)">
-                    −
-                    </button>
-
-                    <span>
-                    ${item.quantity}
-                    </span>
-
-                    <button
-                    onclick="changeQuantity(${index}, 1)">
-                    +
-                    </button>
-
-                    <button
-                    class="remove"
-                    onclick="removeItem(${index})">
-                    🗑️
-                    </button>
-
-                </div>
-            `;
-
-
-            cartItems.appendChild(
-                div
-            );
-
-        }
-    );
+updateCart();
 
 }
 
 
-function changeQuantity(
-    index,
-    amount
-) {
+function removeItem(index){
 
-    cart[index].quantity +=
-        amount;
+cart.splice(index,1);
 
-
-    if (
-        cart[index].quantity <= 0
-    ) {
-
-        cart.splice(
-            index,
-            1
-        );
-
-    }
-
-
-    updateCart();
+updateCart();
 
 }
 
 
-function removeItem(index) {
+function openCart(){
 
-    cart.splice(
-        index,
-        1
-    );
-
-    updateCart();
+document.getElementById(
+"cartWindow"
+).style.display="block";
 
 }
 
 
-function openCart() {
+function closeCart(){
 
-    document.getElementById(
-        "cartWindow"
-    ).style.display =
-        "block";
-
-}
-
-
-function closeCart() {
-
-    document.getElementById(
-        "cartWindow"
-    ).style.display =
-        "none";
+document.getElementById(
+"cartWindow"
+).style.display="none";
 
 }
 
 
-/* SEND ORDER */
+/* =========================
+   SEND ORDER TO FORMSPREE
+========================= */
 
-async function placeOrder() {
+async function placeOrder(){
 
+if(cart.length===0){
 
-    if (cart.length === 0) {
+alert("Your cart is empty.");
 
-        alert(
-            "Your cart is empty."
-        );
+return;
 
-        return;
+}
 
-    }
+let order="";
 
+cart.forEach(item=>{
 
-    let orderText = "";
+order+=
+item.name+
+" x "+
+item.quantity+
+" = ¥"+
+(item.price*item.quantity)+
+"\n";
 
+});
 
-    cart.forEach(
-        function(item) {
+let total=
+cart.reduce(
+(sum,item)=>
+sum+
+item.price*
+item.quantity,
+0
+);
 
-            orderText +=
-                item.name +
-                " × " +
-                item.quantity +
-                " = ¥" +
-                (
-                    item.price *
-                    item.quantity
-                ) +
-                "\n";
-
-        }
-    );
-
-
-    const total =
-        cart.reduce(
-            function(sum, item) {
-
-                return sum +
-                    item.price *
-                    item.quantity;
-
-            },
-            0
-        );
+let spice=
+document.querySelector(
+'input[name="spice"]:checked'
+).value;
 
 
-    const spice =
-        document.querySelector(
-            'input[name="spice"]:checked'
-        ).value;
+let formData=new FormData();
+
+formData.append(
+"table_number",
+document.getElementById(
+"tableNumber"
+).value
+);
+
+formData.append(
+"customer_name",
+document.getElementById(
+"customerName"
+).value ||
+"Not provided"
+);
+
+formData.append(
+"order",
+order+
+"\nSpice Level: "+
+spice
+);
+
+formData.append(
+"total",
+"¥"+total
+);
+
+formData.append(
+"_subject",
+"New Sasurali Ghar Order - "+
+document.getElementById(
+"tableNumber"
+).value
+);
 
 
-    orderText +=
-        "\nSpice Level: " +
-        spice;
+let status=
+document.getElementById(
+"orderStatus"
+);
+
+status.textContent=
+"Sending order...";
 
 
-    const formData =
-        new FormData();
+try{
+
+let response=
+await fetch(
+"https://formspree.io/f/xoeagryl",
+{
+method:"POST",
+body:formData,
+headers:{
+"Accept":
+"application/json"
+}
+}
+);
 
 
-    formData.append(
-        "table_number",
-        restaurantTable
-    );
+if(response.ok){
 
+status.textContent=
+"✅ Order sent successfully!";
 
-    formData.append(
-        "customer_name",
-        document.getElementById(
-            "customerName"
-        ).value ||
-        "Not provided"
-    );
+alert(
+"Your order has been sent."
+);
 
+cart=[];
 
-    formData.append(
-        "order",
-        orderText
-    );
+updateCart();
 
+document.getElementById(
+"customerName"
+).value="";
 
-    formData.append(
-        "total",
-        "¥" + total
-    );
+}else{
 
+status.textContent=
+"❌ Order could not be sent.";
 
-    formData.append(
-        "_subject",
-        "New Sasurali Ghar Restaurant Order - " +
-        restaurantTable
-    );
+}
 
+}catch(error){
 
-    const status =
-        document.getElementById(
-            "orderStatus"
-        );
+status.textContent=
+"❌ Connection error.";
 
-
-    status.innerText =
-        "Sending order...";
-
-
-    try {
-
-        const response =
-            await fetch(
-                "https://formspree.io/f/xoeagryl",
-                {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        "Accept":
-                            "application/json"
-                    }
-                }
-            );
-
-
-        if (response.ok) {
-
-            status.innerText =
-                "✅ Order sent successfully!";
-
-
-            alert(
-                "Thank you! Your order has been sent to the restaurant."
-            );
-
-
-            cart = [];
-
-
-            updateCart();
-
-
-            document.getElementById(
-                "customerName"
-            ).value = "";
-
-        }
-
-        else {
-
-            status.innerText =
-                "❌ Could not send the order.";
-
-            alert(
-                "The order could not be sent. Please try again."
-            );
-
-        }
-
-    }
-
-    catch (error) {
-
-        status.innerText =
-            "❌ Connection error.";
-
-        alert(
-            "Please check your internet connection and try again."
-        );
-
-    }
+}
 
 }
 
 
-/* LANGUAGE */
+/* =========================
+   LANGUAGE
+========================= */
 
-function changeLanguage(
-    language
-) {
+function changeLanguage(language){
 
-    const description =
-        document.getElementById(
-            "restaurant-description"
-        );
+let description=
+document.getElementById(
+"restaurantDescription"
+);
 
+let welcome=
+document.querySelector(
+".welcome"
+);
 
-    const welcome =
-        document.querySelector(
-            ".welcome"
-        );
+if(language==="ja"){
 
+description.textContent=
+"本格ネパール料理レストラン";
 
-    const englishButton =
-        document.getElementById(
-            "englishButton"
-        );
+welcome.textContent=
+"ようこそ";
 
+document.getElementById(
+"englishButton"
+).classList.remove("active");
 
-    const japaneseButton =
-        document.getElementById(
-            "japaneseButton"
-        );
+document.getElementById(
+"japaneseButton"
+).classList.add("active");
 
+}else{
 
-    if (language === "ja") {
+description.textContent=
+"Authentic Nepalese Restaurant";
 
-        description.innerText =
-            "本格ネパール料理レストラン";
+welcome.textContent=
+"स्वागत छ • Welcome";
 
-        welcome.innerText =
-            "ようこそ";
+document.getElementById(
+"japaneseButton"
+).classList.remove("active");
 
-        englishButton.classList.remove(
-            "active"
-        );
+document.getElementById(
+"englishButton"
+).classList.add("active");
 
-        japaneseButton.classList.add(
-            "active"
-        );
-
-    }
-
-    else {
-
-        description.innerText =
-            "Authentic Nepalese Restaurant";
-
-        welcome.innerText =
-            "स्वागत छ • Welcome";
-
-        japaneseButton.classList.remove(
-            "active"
-        );
-
-        englishButton.classList.add(
-            "active"
-        );
-
-    }
+}
 
 }
 
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
-function searchMenu() {
+function searchMenu(){
 
-    const search =
-        document.getElementById(
-            "searchBox"
-        ).value.toLowerCase();
+let search=
+document.getElementById(
+"searchBox"
+).value.toLowerCase();
 
+document.querySelectorAll(
+".item"
+).forEach(item=>{
 
-    const items =
-        document.querySelectorAll(
-            ".item"
-        );
+let text=
+item.innerText.toLowerCase();
 
+item.style.display=
+text.includes(search)
+?"block"
+:"none";
 
-    items.forEach(
-        function(item) {
-
-            const text =
-                item.innerText.toLowerCase();
-
-
-            if (
-                text.includes(search)
-            ) {
-
-                item.style.display =
-                    "block";
-
-            }
-
-            else {
-
-                item.style.display =
-                    "none";
-
-            }
-
-        }
-    );
+});
 
 }
 
 
-/* CATEGORY */
+/* =========================
+   CATEGORIES
+========================= */
 
-function showCategory(
-    category
-) {
+function showCategory(category){
 
-    const items =
-        document.querySelectorAll(
-            ".item"
-        );
+document.querySelectorAll(
+".item"
+).forEach(item=>{
 
+if(
+category==="all" ||
+item.dataset.category===category
+){
 
-    items.forEach(
-        function(item) {
+item.style.display="block";
 
-            if (
-                category === "all" ||
-                item.dataset.category ===
-                category
-            ) {
+}else{
 
-                item.style.display =
-                    "block";
-
-            }
-
-            else {
-
-                item.style.display =
-                    "none";
-
-            }
-
-        }
-    );
+item.style.display="none";
 
 }
 
+});
 
-/* START */
-
-getTableFromURL();
+}
 
 updateCart();
 
