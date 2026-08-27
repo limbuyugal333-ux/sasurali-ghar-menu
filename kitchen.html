@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +8,7 @@
 <title>Sasurali Ghar - Kitchen</title>
 
 <style>
-
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
@@ -39,10 +37,44 @@ margin-top:8px;
 font-size:14px;
 }
 
+.sound-button{
+margin-top:12px;
+background:white;
+color:#7b1e1e;
+border:0;
+padding:12px 20px;
+border-radius:25px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.sound-on{
+background:#228b22;
+color:white;
+}
+
 .container{
 max-width:900px;
 margin:auto;
 padding:15px;
+}
+
+.new-alert{
+display:none;
+background:#228b22;
+color:white;
+padding:18px;
+border-radius:12px;
+margin-bottom:15px;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+50%{opacity:.55}
 }
 
 .order-card{
@@ -52,6 +84,11 @@ padding:18px;
 margin-bottom:18px;
 box-shadow:0 3px 12px #ccc;
 border-left:7px solid #7b1e1e;
+}
+
+.new-order{
+border-left-color:#228b22;
+box-shadow:0 0 12px #228b22;
 }
 
 .order-top{
@@ -71,6 +108,7 @@ color:#7b1e1e;
 .order-time{
 color:#777;
 font-size:13px;
+margin-top:4px;
 }
 
 .status{
@@ -212,13 +250,10 @@ flex-direction:column;
 }
 
 }
-
 </style>
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -228,16 +263,33 @@ flex-direction:column;
 🍳 Kitchen Order Screen
 </div>
 
-</header>
+<button
+id="soundButton"
+class="sound-button"
+onclick="enableSound()">
+🔔 Enable Kitchen Sound
+</button>
 
+</header>
 
 <div class="container">
 
-<button class="refresh" onclick="loadOrders()">
+<div
+id="newAlert"
+class="new-alert">
+🔔 NEW ORDER!
+</div>
+
+<button
+class="refresh"
+onclick="loadOrders()">
 🔄 Refresh Orders
 </button>
 
-<div id="errorBox" class="error"></div>
+<div
+id="errorBox"
+class="error">
+</div>
 
 <div id="orders">
 
@@ -249,26 +301,174 @@ Loading orders...
 
 </div>
 
-
 <script>
 
-
 /* =====================================
-   SUPABASE CONNECTION
+   SUPABASE
 ===================================== */
 
 const SUPABASE_URL =
 "https://naqxasgbfnjpamzjwkov.supabase.co";
 
-
-/*
-   IMPORTANT:
-   Put the SAME PUBLISHABLE KEY
-   that is already working in index.html.
-*/
-
 const SUPABASE_KEY =
 "sb_publishable_vKkQZFBvWPu1FBYiR3QCdQ_DlkzGJqj";
+
+
+/* =====================================
+   VARIABLES
+===================================== */
+
+let previousOrderIds = [];
+
+let firstLoad = true;
+
+let soundEnabled = false;
+
+let audioContext = null;
+
+
+/* =====================================
+   ENABLE SOUND
+===================================== */
+
+function enableSound(){
+
+try{
+
+audioContext =
+new (
+window.AudioContext ||
+window.webkitAudioContext
+)();
+
+if(audioContext.state==="suspended"){
+
+audioContext.resume();
+
+}
+
+soundEnabled=true;
+
+const button =
+document.getElementById(
+"soundButton"
+);
+
+button.textContent =
+"🔔 Kitchen Sound ON";
+
+button.classList.add(
+"sound-on"
+);
+
+playSound();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Sound is not available on this tablet."
+);
+
+}
+
+}
+
+
+/* =====================================
+   PLAY ALERT SOUND
+===================================== */
+
+function playSound(){
+
+if(!soundEnabled || !audioContext){
+
+return;
+
+}
+
+const oscillator =
+audioContext.createOscillator();
+
+const gain =
+audioContext.createGain();
+
+oscillator.connect(
+gain
+);
+
+gain.connect(
+audioContext.destination
+);
+
+oscillator.frequency.value =
+880;
+
+gain.gain.value =
+0.25;
+
+oscillator.start();
+
+oscillator.stop(
+audioContext.currentTime + 0.25
+);
+
+}
+
+
+/* =====================================
+   VIBRATION
+===================================== */
+
+function vibrate(){
+
+if(
+navigator.vibrate
+){
+
+navigator.vibrate([
+300,
+150,
+300,
+150,
+500
+]);
+
+}
+
+}
+
+
+/* =====================================
+   NEW ORDER ALERT
+===================================== */
+
+function newOrderAlert(){
+
+const alertBox =
+document.getElementById(
+"newAlert"
+);
+
+alertBox.style.display =
+"block";
+
+playSound();
+
+vibrate();
+
+setTimeout(
+function(){
+
+alertBox.style.display =
+"none";
+
+},
+5000
+);
+
+}
 
 
 /* =====================================
@@ -278,12 +478,17 @@ const SUPABASE_KEY =
 async function loadOrders(){
 
 const ordersBox =
-document.getElementById("orders");
+document.getElementById(
+"orders"
+);
 
 const errorBox =
-document.getElementById("errorBox");
+document.getElementById(
+"errorBox"
+);
 
-errorBox.style.display="none";
+errorBox.style.display =
+"none";
 
 try{
 
@@ -312,7 +517,6 @@ SUPABASE_KEY
 
 );
 
-
 if(!response.ok){
 
 const error =
@@ -323,19 +527,59 @@ console.error(error);
 errorBox.textContent =
 "❌ Could not load orders.";
 
-errorBox.style.display="block";
+errorBox.style.display =
+"block";
 
 return;
 
 }
 
-
 const orders =
 await response.json();
 
 
-displayOrders(orders);
+/* =====================================
+   CHECK FOR NEW ORDERS
+===================================== */
 
+const currentNewIds =
+orders
+
+.filter(
+order =>
+order.status === "new"
+)
+
+.map(
+order =>
+String(order.id)
+);
+
+
+if(!firstLoad){
+
+const newOrders =
+currentNewIds.filter(
+id =>
+!previousOrderIds.includes(id)
+);
+
+if(newOrders.length > 0){
+
+newOrderAlert();
+
+}
+
+}
+
+
+previousOrderIds =
+currentNewIds;
+
+firstLoad=false;
+
+
+displayOrders(orders);
 
 }catch(error){
 
@@ -344,7 +588,8 @@ console.error(error);
 errorBox.textContent =
 "❌ Connection error.";
 
-errorBox.style.display="block";
+errorBox.style.display =
+"block";
 
 }
 
@@ -358,8 +603,9 @@ errorBox.style.display="block";
 function displayOrders(orders){
 
 const box =
-document.getElementById("orders");
-
+document.getElementById(
+"orders"
+);
 
 if(orders.length===0){
 
@@ -377,17 +623,30 @@ return;
 
 }
 
-
 box.innerHTML="";
 
 
-orders.forEach(order=>{
+orders.forEach(
+order=>{
 
 const card =
-document.createElement("div");
+document.createElement(
+"div"
+);
 
 card.className =
 "order-card";
+
+
+if(
+order.status==="new"
+){
+
+card.classList.add(
+"new-order"
+);
+
+}
 
 
 let statusClass =
@@ -397,7 +656,9 @@ let statusText =
 "NEW";
 
 
-if(order.status==="preparing"){
+if(
+order.status==="preparing"
+){
 
 statusClass =
 "status-preparing";
@@ -408,7 +669,9 @@ statusText =
 }
 
 
-if(order.status==="completed"){
+if(
+order.status==="completed"
+){
 
 statusClass =
 "status-completed";
@@ -423,10 +686,13 @@ let itemsHTML="";
 
 
 if(
-Array.isArray(order.order_items)
+Array.isArray(
+order.order_items
+)
 ){
 
-order.order_items.forEach(item=>{
+order.order_items.forEach(
+item=>{
 
 itemsHTML += `
 
@@ -465,7 +731,9 @@ order.spice_level ||
 
 
 let created =
-formatTime(order.created_at);
+formatTime(
+order.created_at
+);
 
 
 card.innerHTML = `
@@ -477,7 +745,8 @@ card.innerHTML = `
 <div class="table">
 
 🪑 ${escapeHTML(
-order.table_number || "Unknown"
+order.table_number ||
+"Unknown"
 )}
 
 </div>
@@ -536,6 +805,7 @@ Total: ¥${order.total}
 
 ${
 order.status==="new"
+
 ?
 
 `<button
@@ -554,6 +824,7 @@ onclick="changeStatus('${order.id}','preparing')">
 
 ${
 order.status==="preparing"
+
 ?
 
 `<button
@@ -572,6 +843,7 @@ onclick="changeStatus('${order.id}','completed')">
 
 ${
 order.status==="completed"
+
 ?
 
 `<button
@@ -591,7 +863,6 @@ disabled>
 
 `;
 
-
 box.appendChild(card);
 
 });
@@ -600,7 +871,7 @@ box.appendChild(card);
 
 
 /* =====================================
-   CHANGE ORDER STATUS
+   CHANGE STATUS
 ===================================== */
 
 async function changeStatus(
@@ -648,7 +919,6 @@ status:newStatus
 
 );
 
-
 if(!response.ok){
 
 const error =
@@ -664,9 +934,7 @@ return;
 
 }
 
-
 loadOrders();
-
 
 }catch(error){
 
@@ -685,7 +953,9 @@ alert(
    TIME
 ===================================== */
 
-function formatTime(dateString){
+function formatTime(
+dateString
+){
 
 if(!dateString){
 
@@ -694,8 +964,9 @@ return "";
 }
 
 const date =
-new Date(dateString);
-
+new Date(
+dateString
+);
 
 return date.toLocaleString(
 "en-JP",
@@ -718,19 +989,36 @@ minute:"2-digit"
    SECURITY
 ===================================== */
 
-function escapeHTML(value){
+function escapeHTML(
+value
+){
 
 return String(value)
 
-.replaceAll("&","&amp;")
+.replaceAll(
+"&",
+"&amp;"
+)
 
-.replaceAll("<","&lt;")
+.replaceAll(
+"<",
+"&lt;"
+)
 
-.replaceAll(">","&gt;")
+.replaceAll(
+">",
+"&gt;"
+)
 
-.replaceAll('"',"&quot;")
+.replaceAll(
+'"',
+"&quot;"
+)
 
-.replaceAll("'","&#039;");
+.replaceAll(
+"'",
+"&#039;"
+);
 
 }
 
@@ -751,9 +1039,8 @@ loadOrders,
 5000
 );
 
-
 </script>
-
 
 </body>
 </html>
+```
