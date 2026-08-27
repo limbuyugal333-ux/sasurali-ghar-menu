@@ -8,7 +8,10 @@
 <title>Sasurali Ghar - Kitchen</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
@@ -37,44 +40,40 @@ margin-top:8px;
 font-size:14px;
 }
 
-.sound-button{
-margin-top:12px;
-background:white;
-color:#7b1e1e;
-border:0;
-padding:12px 20px;
-border-radius:25px;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.sound-on{
-background:#228b22;
-color:white;
-}
-
 .container{
 max-width:900px;
 margin:auto;
 padding:15px;
 }
 
-.new-alert{
-display:none;
+.sound-button{
+width:100%;
 background:#228b22;
 color:white;
-padding:18px;
-border-radius:12px;
-margin-bottom:15px;
-text-align:center;
-font-size:22px;
+border:0;
+border-radius:10px;
+padding:15px;
+font-size:18px;
 font-weight:bold;
-animation:blink 1s infinite;
+cursor:pointer;
+margin-bottom:10px;
 }
 
-@keyframes blink{
-50%{opacity:.55}
+.sound-button.enabled{
+background:#555;
+}
+
+.refresh{
+background:white;
+color:#7b1e1e;
+border:2px solid #7b1e1e;
+margin-top:0;
+width:100%;
+border-radius:10px;
+padding:13px 16px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
 }
 
 .order-card{
@@ -87,8 +86,23 @@ border-left:7px solid #7b1e1e;
 }
 
 .new-order{
-border-left-color:#228b22;
-box-shadow:0 0 12px #228b22;
+animation:newOrder 1s infinite;
+}
+
+@keyframes newOrder{
+
+0%{
+box-shadow:0 0 0 0 rgba(123,30,30,.5);
+}
+
+70%{
+box-shadow:0 0 0 12px rgba(123,30,30,0);
+}
+
+100%{
+box-shadow:0 0 0 0 rgba(123,30,30,0);
+}
+
 }
 
 .order-top{
@@ -108,7 +122,7 @@ color:#7b1e1e;
 .order-time{
 color:#777;
 font-size:13px;
-margin-top:4px;
+margin-top:5px;
 }
 
 .status{
@@ -199,14 +213,6 @@ background:#228b22;
 color:white;
 }
 
-.refresh{
-background:white;
-color:#7b1e1e;
-border:2px solid #7b1e1e;
-margin-top:10px;
-width:100%;
-}
-
 .empty{
 background:white;
 padding:40px 20px;
@@ -231,6 +237,13 @@ padding:20px;
 color:#777;
 }
 
+.sound-status{
+text-align:center;
+font-weight:bold;
+margin:8px 0 15px;
+color:#228b22;
+}
+
 @media(max-width:600px){
 
 header h1{
@@ -250,10 +263,13 @@ flex-direction:column;
 }
 
 }
+
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -263,33 +279,45 @@ flex-direction:column;
 🍳 Kitchen Order Screen
 </div>
 
+</header>
+
+
+<div class="container">
+
+
 <button
 id="soundButton"
 class="sound-button"
 onclick="enableSound()">
-🔔 Enable Kitchen Sound
+
+🔊 Enable Kitchen Sound
+
 </button>
 
-</header>
-
-<div class="container">
 
 <div
-id="newAlert"
-class="new-alert">
-🔔 NEW ORDER!
+id="soundStatus"
+class="sound-status">
+
+Sound is not enabled yet.
+
 </div>
+
 
 <button
 class="refresh"
 onclick="loadOrders()">
+
 🔄 Refresh Orders
+
 </button>
+
 
 <div
 id="errorBox"
 class="error">
 </div>
+
 
 <div id="orders">
 
@@ -299,37 +327,38 @@ Loading orders...
 
 </div>
 
+
 </div>
+
 
 <script>
 
+
 /* =====================================
-   SUPABASE
+   SUPABASE CONNECTION
 ===================================== */
 
 const SUPABASE_URL =
 "https://naqxasgbfnjpamzjwkov.supabase.co";
+
 
 const SUPABASE_KEY =
 "sb_publishable_vKkQZFBvWPu1FBYiR3QCdQ_DlkzGJqj";
 
 
 /* =====================================
-   VARIABLES
+   SOUND
 ===================================== */
-
-let previousOrderIds = [];
-
-let firstLoad = true;
 
 let soundEnabled = false;
 
+let knownOrderIds = new Set();
+
+let firstLoad = true;
+
+
 let audioContext = null;
 
-
-/* =====================================
-   ENABLE SOUND
-===================================== */
 
 function enableSound(){
 
@@ -341,34 +370,42 @@ window.AudioContext ||
 window.webkitAudioContext
 )();
 
-if(audioContext.state==="suspended"){
+if(audioContext.state === "suspended"){
 
 audioContext.resume();
 
 }
 
-soundEnabled=true;
+playTestSound();
 
-const button =
+soundEnabled = true;
+
+
 document.getElementById(
 "soundButton"
+).textContent =
+"🔊 Kitchen Sound Enabled";
+
+
+document.getElementById(
+"soundButton"
+).classList.add(
+"enabled"
 );
 
-button.textContent =
-"🔔 Kitchen Sound ON";
 
-button.classList.add(
-"sound-on"
-);
+document.getElementById(
+"soundStatus"
+).textContent =
+"✅ Sound is enabled. New orders will ring.";
 
-playSound();
 
 }catch(error){
 
 console.error(error);
 
 alert(
-"Sound is not available on this tablet."
+"Could not enable sound. Please check your browser settings."
 );
 
 }
@@ -376,23 +413,21 @@ alert(
 }
 
 
-/* =====================================
-   PLAY ALERT SOUND
-===================================== */
+function playTestSound(){
 
-function playSound(){
-
-if(!soundEnabled || !audioContext){
+if(!audioContext){
 
 return;
 
 }
+
 
 const oscillator =
 audioContext.createOscillator();
 
 const gain =
 audioContext.createGain();
+
 
 oscillator.connect(
 gain
@@ -402,71 +437,119 @@ gain.connect(
 audioContext.destination
 );
 
-oscillator.frequency.value =
-880;
 
-gain.gain.value =
-0.25;
+oscillator.type =
+"sine";
+
+oscillator.frequency.value =
+800;
+
+
+gain.gain.setValueAtTime(
+0.001,
+audioContext.currentTime
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.5,
+audioContext.currentTime + 0.02
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.001,
+audioContext.currentTime + 0.5
+);
+
 
 oscillator.start();
 
 oscillator.stop(
-audioContext.currentTime + 0.25
+audioContext.currentTime + 0.5
 );
 
 }
 
 
-/* =====================================
-   VIBRATION
-===================================== */
+function playNewOrderSound(){
 
-function vibrate(){
+if(!soundEnabled){
 
-if(
-navigator.vibrate
-){
-
-navigator.vibrate([
-300,
-150,
-300,
-150,
-500
-]);
-
-}
+return;
 
 }
 
 
-/* =====================================
-   NEW ORDER ALERT
-===================================== */
+if(!audioContext){
 
-function newOrderAlert(){
+return;
 
-const alertBox =
-document.getElementById(
-"newAlert"
+}
+
+
+if(audioContext.state === "suspended"){
+
+audioContext.resume();
+
+}
+
+
+const now =
+audioContext.currentTime;
+
+
+for(let i=0;i<3;i++){
+
+const oscillator =
+audioContext.createOscillator();
+
+const gain =
+audioContext.createGain();
+
+
+oscillator.connect(
+gain
 );
 
-alertBox.style.display =
-"block";
-
-playSound();
-
-vibrate();
-
-setTimeout(
-function(){
-
-alertBox.style.display =
-"none";
-
-},
-5000
+gain.connect(
+audioContext.destination
 );
+
+
+oscillator.type =
+"sine";
+
+
+oscillator.frequency.value =
+i % 2 === 0
+? 900
+: 650;
+
+
+gain.gain.setValueAtTime(
+0.001,
+now + i * 0.35
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.7,
+now + i * 0.35 + 0.03
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.001,
+now + i * 0.35 + 0.3
+);
+
+
+oscillator.start(
+now + i * 0.35
+);
+
+oscillator.stop(
+now + i * 0.35 + 0.3
+);
+
+}
 
 }
 
@@ -487,10 +570,13 @@ document.getElementById(
 "errorBox"
 );
 
+
 errorBox.style.display =
 "none";
 
+
 try{
+
 
 const response =
 await fetch(
@@ -517,6 +603,7 @@ SUPABASE_KEY
 
 );
 
+
 if(!response.ok){
 
 const error =
@@ -534,6 +621,7 @@ return;
 
 }
 
+
 const orders =
 await response.json();
 
@@ -542,44 +630,57 @@ await response.json();
    CHECK FOR NEW ORDERS
 ===================================== */
 
-const currentNewIds =
-orders
-
-.filter(
-order =>
-order.status === "new"
-)
-
-.map(
-order =>
-String(order.id)
-);
-
-
 if(!firstLoad){
 
-const newOrders =
-currentNewIds.filter(
-id =>
-!previousOrderIds.includes(id)
+let newOrderFound =
+false;
+
+
+orders.forEach(order=>{
+
+if(
+!knownOrderIds.has(
+String(order.id)
+)
+&&
+order.status==="new"
+){
+
+newOrderFound =
+true;
+
+}
+
+});
+
+
+if(newOrderFound){
+
+playNewOrderSound();
+
+}
+
+}
+
+
+/* Save known order IDs */
+
+knownOrderIds =
+new Set(
+orders.map(
+order=>String(order.id)
+)
 );
 
-if(newOrders.length > 0){
 
-newOrderAlert();
-
-}
-
-}
+firstLoad =
+false;
 
 
-previousOrderIds =
-currentNewIds;
+displayOrders(
+orders
+);
 
-firstLoad=false;
-
-
-displayOrders(orders);
 
 }catch(error){
 
@@ -600,12 +701,15 @@ errorBox.style.display =
    DISPLAY ORDERS
 ===================================== */
 
-function displayOrders(orders){
+function displayOrders(
+orders
+){
 
 const box =
 document.getElementById(
 "orders"
 );
+
 
 if(orders.length===0){
 
@@ -623,24 +727,26 @@ return;
 
 }
 
-box.innerHTML="";
+
+box.innerHTML =
+"";
 
 
 orders.forEach(
 order=>{
+
 
 const card =
 document.createElement(
 "div"
 );
 
+
 card.className =
 "order-card";
 
 
-if(
-order.status==="new"
-){
+if(order.status==="new"){
 
 card.classList.add(
 "new-order"
@@ -682,7 +788,8 @@ statusText =
 }
 
 
-let itemsHTML="";
+let itemsHTML =
+"";
 
 
 if(
@@ -700,7 +807,10 @@ itemsHTML += `
 
 <div class="item-name">
 
-${escapeHTML(item.name)}
+${escapeHTML(
+item.name
+)}
+
  × ${item.quantity}
 
 </div>
@@ -759,6 +869,7 @@ ${created}
 
 </div>
 
+
 <div class="status ${statusClass}">
 
 ${statusText}
@@ -780,14 +891,19 @@ ${itemsHTML}
 <div class="detail-row">
 
 👤 <strong>Customer:</strong>
-${escapeHTML(customer)}
+${escapeHTML(
+customer
+)}
 
 </div>
+
 
 <div class="detail-row">
 
 🌶️ <strong>Spice:</strong>
-${escapeHTML(spice)}
+${escapeHTML(
+spice
+)}
 
 </div>
 
@@ -803,67 +919,90 @@ Total: ¥${order.total}
 
 <div class="buttons">
 
+
 ${
 order.status==="new"
-
 ?
 
-`<button
+`
+
+<button
 class="prepare"
-onclick="changeStatus('${order.id}','preparing')">
+onclick="changeStatus(
+'${order.id}',
+'preparing'
+)">
 
 👨‍🍳 Preparing
 
-</button>`
+</button>
+
+`
 
 :
 
 ""
+
 }
 
 
 ${
 order.status==="preparing"
-
 ?
 
-`<button
+`
+
+<button
 class="complete"
-onclick="changeStatus('${order.id}','completed')">
+onclick="changeStatus(
+'${order.id}',
+'completed'
+)">
 
 ✅ Completed
 
-</button>`
+</button>
+
+`
 
 :
 
 ""
+
 }
 
 
 ${
 order.status==="completed"
-
 ?
 
-`<button
+`
+
+<button
 class="complete"
 disabled>
 
 ✅ Completed
 
-</button>`
+</button>
+
+`
 
 :
 
 ""
+
 }
+
 
 </div>
 
 `;
 
-box.appendChild(card);
+
+box.appendChild(
+card
+);
 
 });
 
@@ -880,6 +1019,7 @@ newStatus
 ){
 
 try{
+
 
 const response =
 await fetch(
@@ -909,15 +1049,18 @@ SUPABASE_KEY,
 
 },
 
-body:JSON.stringify({
+body:
+JSON.stringify({
 
-status:newStatus
+status:
+newStatus
 
 })
 
 }
 
 );
+
 
 if(!response.ok){
 
@@ -934,7 +1077,9 @@ return;
 
 }
 
+
 loadOrders();
+
 
 }catch(error){
 
@@ -963,19 +1108,25 @@ return "";
 
 }
 
+
 const date =
 new Date(
 dateString
 );
+
 
 return date.toLocaleString(
 "en-JP",
 {
 
 year:"numeric",
+
 month:"short",
+
 day:"numeric",
+
 hour:"2-digit",
+
 minute:"2-digit"
 
 }
@@ -993,7 +1144,9 @@ function escapeHTML(
 value
 ){
 
-return String(value)
+return String(
+value
+)
 
 .replaceAll(
 "&",
@@ -1039,7 +1192,9 @@ loadOrders,
 5000
 );
 
+
 </script>
+
 
 </body>
 </html>
